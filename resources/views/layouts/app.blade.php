@@ -11,16 +11,45 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $(".btnquantitycart").change(
+                function(){
+    var itemslist = [];
+	var id = $(this).attr("id");
+    var qty = $(this).val();
+
+    var arr= id.split('_');
+
+    if(arr.length == 2)
+    {
+        id = id + '_' + qty ; 
+
+    }
+    else if(arr.length == 3)
+    {
+        arr[2] = qty;
+        id = arr.join("_");
+    }
+    $(this).attr("id",id);
+	itemslist.push(id);
+    // console.log(itemslist);
+// alert(id);	
+	$.post('/cart',{'items' : itemslist,'_token': $('input[name=_token]').val()},function(data)
+	{		
+		console.log(data);
+	});
+                    // alert(true);
+                }
+            );
+
+        });
+    </script>
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> --}}
-    <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
-    
-<script type="text/javascript" src="{{asset('js/script.js')}}"></script>
- 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -30,10 +59,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Takeout') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -75,12 +104,10 @@
             </div>
         </nav>
 
-        <main class="role">
+        <main class="py-4">
             @yield('content')
         </main>
     </div>
-
-@include('inc.footer')   
-
+    {{csrf_field()}}
 </body>
 </html>

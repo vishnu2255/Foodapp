@@ -25,13 +25,24 @@
       <br><br>
 <table class="table table-striped" width="100%" border="0">
   <tr>
-    <td width="27%">Location:</td>
-    <td width="73%"> {{$chefprof->location}}</td>
+    <td width="27%">Home Address :</td>
+    <td width="73%"> {{$chefprof->home_address}}</td>
   </tr>
   <tr>
-    <td>Orders:</td>
-    <td>{{$chefprof->ordernum}}</td>
-  </tr>
+      <td width="27%">City :</td>
+      <td width="73%"> {{$chefprof->city}}</td>
+    </tr>
+
+    <tr>
+        <td width="27%">Phone :</td>
+        <td width="73%"> {{$chefprof->phone_number}}</td>
+      </tr>
+
+      <tr>
+          <td width="27%">Email :</td>
+          <td width="73%"> {{$chefprof->email}}</td>
+        </tr>
+
   <tr>
     <td>Certificates: </td>
     <td>George Brown </td>
@@ -45,7 +56,7 @@
   
         <img src="../../images/chef_1.jpeg" class="rounded-circle" />
         <h2>{{$chefprof->name}}</h2>
-        <p class="lead">Orders: {{$chefprof->ordernum}} &nbsp;&nbsp; <img src="../../images/stars.png" width="50%" height="50%" /></p>       
+        {{-- <p class="lead">Orders: {{$chefprof->ordernum}} &nbsp;&nbsp; <img src="../../images/stars.png" width="50%" height="50%" /></p>        --}}
     </div>
     </div>
  <hr/>      

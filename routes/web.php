@@ -12,34 +12,72 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   // return view('chefs/menuscar2');
+    // 
+     return view('welcome');
    // return view('chefs/profile');
 });
 
-Route::get('/chefs/chefslist', function () {
-    return view('chefs/chefslist');
-});
+Route::get('/dishes', 'ChefController@index');
+Route::get('/chefs/{id}', 'ChefController@show');
+
+Route::post('/cart', 'CartController@store');
+Route::get('/cart', 'CartController@index');
+
+Route::post('/checkout', 'CheckOutController@store');
+
+Route::get('/checkout', 'CheckOutController@index');
+
+Route::get('/check', 'CheckOutController@create');
+
+// Route::get('/checkout', function () {
+//   // return view('chefs/menuscar2');
+//    // 
+//    return 123;
+//     // return view('chefs/checkout');
+//   // return view('chefs/profile');
+// });
+
+
+// Route::get('/menus', function () {
+//      return view('chefs/menuscar');
+     
+//     // return view('welcome');
+//     // return view('chefs/profile');
+//  });
+
+// Route::get('/chefs/chefslist', function () {
+//     return view('chefs/chefslist');
+// });
 
 Auth::routes();
 
 // Route::get('/chefs/profile/{pro}', 'ProfileController@test($id)');
-Route::get('/chefs/profile/{pro}', 'ProfileController@show');
+// Route::get('/chefs/profile/{pro}', 'ProfileController@show');
+// Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('/chefs/{id}', 'ChefsController@test');
+// Route::get('/chefs', 'ChefsController@show');
+// //Route::get('/chefs/checkout', 'CheckoutController@show1');
+
+// Route::get('/checkout','CheckoutController@check');
+
+
+
+
+
+Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/chefs/{id}', 'ChefsController@test');
-Route::get('/chefs', 'ChefsController@show');
-//Route::get('/chefs/checkout', 'CheckoutController@show1');
+Auth::routes();
 
-Route::get('/checkout','CheckoutController@check');
-// Route::get('/checkout', function () {
-    
-//     return 123;
-// });
+Route::get('/home', 'HomeController@index')->name('home');
 
+Auth::routes();
 
-// Route::get('/chefs/profile/{id}', function ($id) {
-//      'ChefsController@profile';
-// });
+Route::get('/home', 'HomeController@index')->name('home');
 
+Auth::routes();
 
-
+Route::get('/home', 'HomeController@index')->name('home');

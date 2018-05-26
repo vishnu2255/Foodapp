@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
-                
+
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -53,6 +53,7 @@
                             </div>
                         </div>
 
+
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
@@ -61,6 +62,48 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
+
+                                @if ($errors->has('phone'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="home" class="col-md-4 col-form-label text-md-right">{{ __('Home Address') }}</label>
+                        
+                            <div class="col-md-6">
+                                <input id="home" type="text" class="form-control{{ $errors->has('home') ? ' is-invalid' : '' }}" name="home" value="{{ old('home') }}" required autofocus>
+                        
+                                @if ($errors->has('home'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('home') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="work" class="col-md-4 col-form-label text-md-right">{{ __('Work Address') }}</label>
+                        
+                            <div class="col-md-6">
+                                <input id="work" type="text" class="form-control{{ $errors->has('work') ? ' is-invalid' : '' }}" name="work" value="{{ old('work') }}" required autofocus>
+                        
+                                @if ($errors->has('work'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('work') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>                        
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -68,9 +111,6 @@
                                 </button>
                             </div>
                         </div>
-
-                            @include('layouts.errors');
-                      
                     </form>
                 </div>
             </div>

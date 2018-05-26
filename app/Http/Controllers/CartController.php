@@ -20,16 +20,25 @@ class CartController extends Controller
     {
 
 
-        // $tmpval = DB::table('cart')
-        //                  ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
-        //                  ->select(DB::raw('SUM(menu_items.itm_price) as totsum'))                       
-        //                  ->where('cart.customer_id',5)
-        //                  ->where('menu_items.chef_id',2)                      
-        //                  ->get(); 
+        // $drinks = DB::table()
+
+
+        // $tmpval = DB::table('menu_items')
+                        //  ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
+                        //  ->select(DB::raw('SUM(menu_items.itm_price) as totsum'))                       
+                        //  ->where('cart.customer_id',5)
+                        //  ->where('menu_items.chef_id',2)                      
+                        //  ->get(); 
          
-        // die(var_dump($tmpval));
+        // die(var_dump($tmpval[0]->drinks));
 
+        // $dr =  json_decode($tmpval[0]->drinks);
+        // foreach($dr as $key => $value)
+        // {
+        //   echo $key . $value->qty .$value->price;   
+        // }
 
+        
         $user = Auth::user();      
         // var_dump($user->id);
 
@@ -154,7 +163,7 @@ $tmpkey = $tmpid . '_' . $tmpname.'_'.$tmpsum;
         ->where('menu_item_id','=',$it)
         ->where('customer_id','=',5)
         ->get();
-            
+
       
         // return $getcnt->count();
 

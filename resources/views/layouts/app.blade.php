@@ -15,7 +15,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
+           
 
+           $(".showdrinks").click(function(){
+               var cid = $(this).attr("id");
+               var did = "#drinks_"+cid;
+
+            //    alert(did);
+               $(did).show();
+
+
+           });
+        
             $(".btnquantitycart").change(
                 function(){
     var itemslist = [];

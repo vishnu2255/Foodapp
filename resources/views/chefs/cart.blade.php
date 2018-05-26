@@ -15,12 +15,13 @@
   </div>
 </div> --}}
 
-<hr class="featurette-divider"> 
+{{-- <hr class="featurette-divider">  --}}
 
-
-<div class="col-md-8 order-md-2 mb-4" style="margin: 20px">
-    <h4 class="d-flex justify-content-between align-items-center mb-3">
-      <span class="text-muted">Your cart</span>
+<h3 style="text-align: center"><em><strong> Please Checkout 1 chef items at a time </strong> </em> </h3>
+<div class="col-md-10 order-md-2 mb-4" style="margin: 20px">
+    <h4 class="d-flex justify-content-between align-items-center mb-3" style="text-align: center">
+      {{-- <span class="text-muted" >Your cart</span> --}}
+      Your Cart
        {{-- <span class="badge badge-secondary badge-pill">3</span> --}}
     </h4>
 <?php $chefcnt=0;?>
@@ -33,10 +34,26 @@
        $chefname = $chefdet[1];
        $totsum = $chefdet[2];
 ?>
+<div class="row" style="margin-top: 20px">
+    <div class="col-md-10">
+            <h4 >
+                    <a href="/chefs/{{$chefid}}">  Chef {{$chefcnt}}: {{$chefname}}  </a>    
+            </h4>
+    </div>
 
-    <h4 style="margin: 20px">
-    <a href="/chefs/{{$chefid}}">  Chef {{$chefcnt}}: {{$chefname}}  </a>    
-    </h4>
+    <div class="col-md-2">
+       
+    <button id="{{$chefid}}" class="btn btn-danger btn-lg showdrinks">Add Drinks </button>    
+        
+
+    </div>
+        
+</div>
+    
+
+    <div class="row">
+
+        <div class="col-md-8">
 
     <table class="table table-striped" style="margin: 20px">
         <thead>
@@ -73,13 +90,62 @@
         </tbody>
       </table>
 
-      <div class="container-fluid" style="margin: 20px;height: 50px; padding: 50px">
+                  
+    </div>
+
+
+<div class="col-md-4" id="drinks_{{$chefid}}" style="display:none">
+        
+        <?php 
+        $drsec = $value[0]->drinks;
+        $dr = json_decode($drsec); 
+        $did=0;           
+        ?>
+
+<table class="table table-hover" style="margin: 20px">
+        <thead>
+          <tr>
+            <th scope="col">SNo</th>
+            <th scope="col">Drink</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        @foreach($dr as $dname=>$dvalue)
+<tr>
+        <?php  $did++; ?>
+<th scope="row">
+{{$did}}
+</th>
+<td> {{$dname}} </td>
+<td>  {{$dvalue->qty}}</td>
+
+<td> {{$dvalue->price}} </td>
+
+</tr>
+        @endforeach
+
+        </tbody>
+</table>
+
+    </div>
+</div>
+      <div class="row" style="margin: 20px">
+          <div class="col-md-3">
+                <a href="/checkout/{{$chefid}}"  class="btn btn-warning btn-lg" style="float: left" id="checkout_{{$chefid}}" >Proceed to Checkout</a>            
+          </div>
+    
+          <div class="col-md-4">
+              Total
+          </div>
           
-      <a href="/checkout/{{$chefid}}"  class="btn btn-warning btn-lg" style="float: left" id="checkout_{{$chefid}}" >Proceed to Checkout</a>     
-       
-      <div style="float: right">
-            <span class="" style="color: red" >CDN$</span> <span id="tot_{{$chefid}}"> {{$totsum}}</span>
-      </div>
+          <div class="col-md-4">
+                <span class="" style="color: red" >CDN$</span> <span id="tot_{{$chefid}}"> {{$totsum}}</span>   
+          </div>
+
+
          
       </div>
 

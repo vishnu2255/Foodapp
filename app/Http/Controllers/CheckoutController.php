@@ -115,6 +115,8 @@ class CheckOutController extends Controller
     public function show($id)
     {
         //
+
+        return view('chefs.checkout');  
     }
 
     /**

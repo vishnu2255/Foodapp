@@ -17,7 +17,7 @@
 
 {{-- <hr class="featurette-divider">  --}}
 
-<h3 style="text-align: center"><em><strong> Please Checkout 1 chef items at a time </strong> </em> </h3>
+{{-- <h3 style="text-align: center"><em><strong> Please Checkout 1 chef items at a time </strong> </em> </h3> --}}
 <div class="col-md-10 order-md-2 mb-4" style="margin: 20px">
     <h4 class="d-flex justify-content-between align-items-center mb-3" style="text-align: center">
       {{-- <span class="text-muted" >Your cart</span> --}}
@@ -43,7 +43,7 @@
 
     <div class="col-md-2">
        
-    <button id="{{$chefid}}" class="btn btn-danger btn-lg showdrinks">Add Drinks </button>    
+    <button id="{{$chefid}}" class="btn btn-danger btn-lg showdrinks">Would You Like to Add Drinks? </button>    
         
 
     </div>
@@ -76,11 +76,18 @@
             </td>
             <td>
               {{-- <button> --}}
-              <span>Qty: </span>  <input type="number" id="{{$cartitem->menu_item_id.'_'.$cartitem->chef_id}}" class="btnquantitycart" name="quantity" min="1" max="10" value="{{$cartitem->qty}}" style="text-align: center">
+              {{-- <span>Qty: </span>   --}}
+              <input type="number" id="{{$cartitem->menu_item_id.'_'.$cartitem->chef_id}}" class="form-control btnquantitycart" name="quantity" min="1" max="10" value="{{$cartitem->qty}}" style="text-align: center;width: 70px">
               {{-- </button> --}}
               {{-- {{$cartitem->qty}} --}}
             </td>
             <td>{{$cartitem->itm_price}}</td>
+
+            <td>
+            <button type="button" id="rem_{{$cartitem->menu_item_id}}" class="btn btn-danger btn-sm removebtn" aria-label="Left Align">
+                          Remove
+                    </button>
+            </td>
           </tr>
           
           
@@ -120,7 +127,13 @@
 {{$did}}
 </th>
 <td> {{$dname}} </td>
-<td>  {{$dvalue->qty}}</td>
+<td>
+
+
+<input type="number" id="{{$chefid}}" class="form-control drinksquantitycart" name="drnkquantity" min="1" max="10" value="{{$dvalue->qty}}" style="text-align: center;width:70px;">
+
+</td>
+{{-- <td>  {{$dvalue->qty}}</td> --}}
 
 <td> {{$dvalue->price}} </td>
 

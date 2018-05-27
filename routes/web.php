@@ -23,10 +23,11 @@ Route::get('/chefs/{id}', 'ChefController@show');
 
 Route::post('/cart', 'CartController@store');
 Route::get('/cart', 'CartController@index');
+Route::post('/cart/{id}', 'CartController@destroy');
 
 Route::post('/checkout', 'CheckOutController@store');
 
-Route::get('/checkout', 'CheckOutController@index');
+Route::get('/checkout/{id}', 'CheckOutController@show');
 
 Route::get('/check', 'CheckOutController@create');
 

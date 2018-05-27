@@ -15,8 +15,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-           
+            
+            $('[data-toggle="tooltip"]').tooltip();
 
+            $(".removebtn").click(function(){
+
+                var id = $(this).attr("id").split("_")[1];
+                $.post('/cart/'+id,{'_token': $('input[name=_token]').val()},function(data)
+                {		
+                    console.log(data);
+                });
+
+                 location.reload(true);
+                // alert(id);
+            });
+//cart drinks section
            $(".showdrinks").click(function(){
                var cid = $(this).attr("id");
                var did = "#drinks_"+cid;
@@ -26,15 +39,18 @@
 
 
            });
-        
-            $(".btnquantitycart").change(
+
+
+        //cart items section
+        $(".btnquantitycart").change(
                 function(){
     var itemslist = [];
 	var id = $(this).attr("id");
     var qty = $(this).val();
 
     var arr= id.split('_');
-
+    var chefid  =  arr[1];
+    var spanele = "#tot_"+chefid;
     if(arr.length == 2)
     {
         id = id + '_' + qty ; 
@@ -50,7 +66,8 @@
     // console.log(itemslist);
 // alert(id);	
 	$.post('/cart',{'items' : itemslist,'_token': $('input[name=_token]').val()},function(data)
-	{		
+	{	
+        $(spanele).text(data);	
 		console.log(data);
 	});
                     // alert(true);

@@ -17,99 +17,142 @@
 
 <hr class="featurette-divider"> 
 
+<div class="container">
 
-<div class="col-md-8 order-md-2 mb-4" style="margin: 20px">
-    <h4 class="d-flex justify-content-between align-items-center mb-3">
-      <span class="text-muted">Your cart</span>
-       {{-- <span class="badge badge-secondary badge-pill">3</span> --}}
-    </h4>
+<div class="row">
 
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php $id=0; ?>
-          @foreach($cartitems as $cartitem)
-          <tr>
-            <?php $id++;?>
-          <th scope="row">{{$id}}</th>
-            <td>
-                <h6 class="my-0">{{$cartitem->itm_name}}</h6>
-                <small class="text-muted">{{$cartitem->itm_desc}}</small>
-            </td>
-            <td>
-              <button>
-              Qty: <input type="number" name="quantity">
-              </button>
-              {{-- {{$cartitem->qty}} --}}
-            </td>
-            <td>{{$cartitem->itm_price}}</td>
-          </tr>
-          
-          
-          @endforeach
-          
+<div class="col-md-6" >
+
+    <ul class="list-group">
+        <li class="list-group-item" style="background-color: orange">Order Details</li>
+        <li class="list-group-item">
+          <span class="text-muted">Food & Bevarage Subtotal </span>
+          <span style="float: right"> $23 </span>
+        </li>
+        <li class="list-group-item">
+            <span class="text-muted">HST </span>
+            <span style="float: right"> $1.5 </span>
+        </li>
+        <li class="list-group-item"><span> <b>Total</b> </span>
+          <span style="float: right"> $24.5 </span></li>
+      </ul>
+
+      <hr class="featurette-divider"> 
+
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Payment Method</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01">
+            
+            <option value="1" selected >Credit Card</option>
+            <option value="2">Cash</option>
+            <option value="3">Interact</option>
+
+          </select>
+      </div>
+
+      
+      <div>
+            
          
-        </tbody>
-      </table>
+          <ul class="" id="payment_cc" style="list-style: none; float: left">
+              <li>
+                {{-- <div class="col-md-12 mb-3" style="">                --}}
+                <input class="form-control mb-3" style="width: 350px" type="text" name="ccnum" placeholder="Credit Card Number">
+                {{-- </div> --}}
+              </li>
+              <li>
+                  <div class="row mb-3">
+                     
+                    <div class="col-md-4">
+           
+                      <select class="form-control" id="inputGroupSelect01" name="cc_pay_mon">
+                          <option value="0" selected >Month</option>
+                          <option value="1">01-Jan</option>
+                          <option value="2">02-Feb</option>
+                          <option value="3">03-Mar</option>
+                          <option value="4">04-Apr</option>
+                          <option value="5">05-May</option>
+                          <option value="6">06-Jun</option>
+                          <option value="7">07-Jul</option>
+                          <option value="8">08-Aug</option>
+                          <option value="9">09-Sep</option>
+                          <option value="10">10-Oct</option>
+                          <option value="11">11-Nov</option>
+                          <option value="12">12-Dec</option>
+                        </select>
+           
+                      </div>
 
-    <button  class="btn btn-secondary">Order Now</button>     
-   
-
-  </div>
-
-  @endsection
-
-
-
-
-  {{-- <ul class="list-group m-3">
-      <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Product name</h6>
+                      <div class="col-md-4">
+                     
+                        <select class="form-control" id="inputGroupSelect01" name="cc_pay_year">
             
-          </div>
-          <span class="text-muted">Quantity</span>
-          
-          <span class="text-muted">Price</span>
-        </li>
+                            <option value="0" selected >Year</option>
+                            <option value="1">2018</option>
+                            <option value="2">2019</option>
+                            <option value="3">2020</option>
+                            <option value="4">2021</option>
+                            <option value="5">2022</option>
+                            <option value="6">2023</option>
+                            <option value="7">2024</option>
+                            <option value="8">2025</option>
+                            <option value="9">2026</option>
+                            <option value="10">2027</option>
+                            <option value="11">2028</option>
+                
+                          </select>
 
-    <li class="list-group-item d-flex justify-content-between lh-condensed">
-      <div>
-        <h6 class="my-0">Product name</h6>
-        <small class="text-muted">Brief description</small>
-      </div>
-      <span class="text-muted">$12</span>
+                        </div>
 
-      <span class="text-muted">$12</span>
-    </li>                               
-  </ul>
+                        <div class="col-md-4">
+
+                          <div class="input-group mb-3">
+                              <input type="text" class="form-control" name="cc_pay_cvv" placeholder="CVV">
+                              <div class="input-group-append">
+                                <span class="input-group-text" data-toggle="tooltip" data-placement="bottom" title="3-4 digit number typically on the back of your card" > <strong>?</strong> </span>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+              </li>
+
+              <li>
+                <button class="btn btn-small" style="background-color: red">Confirm</button>
+              </li>
 
 
-  <ul class="list-group m-3">
-      <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Product name</h6>
-            
-          </div>
-          <span class="text-muted">Quantity</span>
-          
-          <span class="text-muted">Price</span>
-        </li>
+          </ul>      
+        </div>
 
-    <li class="list-group-item d-flex justify-content-between lh-condensed">
-      <div>
-        <h6 class="my-0">Product name</h6>
-        <small class="text-muted">Brief description</small>
-      </div>
-      <span class="text-muted">$12</span>
 
-      <span class="text-muted">$12</span>
-    </li>                               
-  </ul> --}}
+
+
+
+    </div>
+
+    <div class="col-md-6">
+
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: orange">Order Items</li>
+            <li class="list-group-item">
+              <span class="text-muted">Item1 </span>
+              <span style="float: right"> $23 </span>
+            </li>
+            <li class="list-group-item">
+                <span class="text-muted">Item2 </span>
+                <span style="float: right"> $1.5 </span>
+            </li>
+            <li class="list-group-item"><span class="text-muted"> Item3 </span>
+              <span style="float: right"> $24.5 </span></li>
+          </ul>
+     
+    </div>
+        
+</div>
+
+</div>
+
+
+@endsection

@@ -23,13 +23,13 @@ class CartController extends Controller
         // $drinks = DB::table()
 
 
-        // $tmpval = DB::table('menu_items')
-                        //  ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
-                        //  ->select(DB::raw('SUM(menu_items.itm_price) as totsum'))                       
-                        //  ->where('cart.customer_id',5)
-                        //  ->where('menu_items.chef_id',2)                      
-                        //  ->get(); 
-         
+        // $tmpval = DB::table('cart')
+        //                  ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
+        //                  ->select(DB::raw('SUM(menu_items.itm_price*cart.qty) as totsum'))                       
+        //                  ->where('cart.customer_id',5)
+        //                  ->where('menu_items.chef_id',2)                      
+        //                  ->get(); 
+        //  die(var_dump($tmpval[0]->totsum));
         // die(var_dump($tmpval[0]->drinks));
 
         // $dr =  json_decode($tmpval[0]->drinks);
@@ -38,7 +38,7 @@ class CartController extends Controller
         //   echo $key . $value->qty .$value->price;   
         // }
 
-        
+
         $user = Auth::user();      
         // var_dump($user->id);
 
@@ -174,6 +174,8 @@ $tmpkey = $tmpid . '_' . $tmpname.'_'.$tmpsum;
     ->where('menu_item_id','=',$it)
     ->where('customer_id','=',5)
     ->update(['qty' => $qty]);
+
+
 }
 else
 {
@@ -184,9 +186,18 @@ else
 
 }
 
+$totsumamnt = DB::table('cart')
+->join('menu_items','menu_items.id','=','cart.menu_item_id') 
+->select(DB::raw('SUM(menu_items.itm_price*cart.qty) as totsum'))                       
+->where('cart.customer_id',5)
+->where('menu_items.chef_id',$cd)                      
+->get(); 
+
+$am = $totsumamnt[0]->totsum;
+
+// die(var_dump($tmpval[0]->totsum));
         
-        
-             return 'done';
+             return $am;
     }
 
     /**
@@ -230,7 +241,11 @@ else
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {        
+        // return $id;
+        DB::table('cart')->where('menu_item_id','=',$id)->delete();
+        return $id;
+ 
+
     }
 }

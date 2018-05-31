@@ -27,6 +27,8 @@ Route::post('/cart/{id}', 'CartController@destroy');
 
 Route::post('/checkout', 'CheckOutController@store');
 
+Route::post('/order', 'OrderController@store');
+
 Route::get('/checkout/{id}', 'CheckOutController@show');
 
 Route::get('/check', 'CheckOutController@create');

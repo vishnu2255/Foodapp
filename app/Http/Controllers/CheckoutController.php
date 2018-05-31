@@ -116,7 +116,42 @@ class CheckOutController extends Controller
     {
         //
 
-        return view('chefs.checkout');  
+
+        $tmpid = $id;
+        $chef_det = DB::table('chef_users')->select('name')->where('id',$id)->first();
+        
+        $tmpname = $chef_det->name;
+    
+        $itemslist = DB::table('cart')
+                         ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
+                        //  ->select(DB::raw('SUM(menu_items.itm_price) as totsum'),'cart.*','menu_items.*')
+                         ->where('cart.customer_id',5)
+                         ->where('menu_items.chef_id',$tmpid)                      
+                         ->get(); 
+         
+        $sum = DB::table('cart')
+        ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
+        ->select(DB::raw('SUM(menu_items.itm_price) as totsum'))                       
+        ->where('cart.customer_id',5)
+        ->where('menu_items.chef_id',$tmpid)                      
+        ->get(); 
+
+        //  die(var_dump($tmpval));
+      $tmpsum = $sum[0]->totsum;
+    
+      $hst = round($tmpsum*0.13,2) ;
+      
+      $totsum =   $tmpsum + $hst ;
+
+      $tmparr = array();
+      $tmparr[0] = $tmpname;
+      $tmparr[1] = $tmpsum;
+      $tmparr[2] = $hst;
+      $tmparr[3] = $totsum;
+      
+// var_dump($itemslist);
+
+        return view('chefs.checkout')->with('itemslist',$itemslist)->with('tmparr',$tmparr);  
     }
 
     /**

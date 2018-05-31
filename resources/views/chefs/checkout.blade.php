@@ -19,22 +19,25 @@
 
 <div class="container">
 
+  <form action="/order" method="post">
+      <h4>{{$tmparr[0]}} </h4>
 <div class="row">
 
 <div class="col-md-6" >
+
 
     <ul class="list-group">
         <li class="list-group-item" style="background-color: orange">Order Details</li>
         <li class="list-group-item">
           <span class="text-muted">Food & Bevarage Subtotal </span>
-          <span style="float: right"> $23 </span>
+          <span name="sumamnt" style="float: right"> ${{$tmparr[1]}} </span>
         </li>
         <li class="list-group-item">
             <span class="text-muted">HST </span>
-            <span style="float: right"> $1.5 </span>
+            <span name="hst" style="float: right"> ${{$tmparr[2]}} </span>
         </li>
         <li class="list-group-item"><span> <b>Total</b> </span>
-          <span style="float: right"> $24.5 </span></li>
+          <span name="totsum" style="float: right"> ${{$tmparr[3]}} </span></li>
       </ul>
 
       <hr class="featurette-divider"> 
@@ -43,7 +46,7 @@
           <div class="input-group-prepend">
             <label class="input-group-text" for="inputGroupSelect01">Payment Method</label>
           </div>
-          <select class="custom-select" id="inputGroupSelect01">
+          <select class="custom-select" name="payment_option" id="inputGroupSelect01">
             
             <option value="1" selected >Credit Card</option>
             <option value="2">Cash</option>
@@ -54,7 +57,6 @@
 
       
       <div>
-            
          
           <ul class="" id="payment_cc" style="list-style: none; float: left">
               <li>
@@ -119,11 +121,12 @@
               </li>
 
               <li>
-                <button class="btn btn-small" style="background-color: red">Confirm</button>
+                <button  type="submit" class="btn btn-small" style="background-color: red">Confirm</button>
               </li>
 
 
-          </ul>      
+          </ul>  
+  
         </div>
 
 
@@ -136,21 +139,23 @@
 
         <ul class="list-group">
             <li class="list-group-item" style="background-color: orange">Order Items</li>
+
+            @foreach($itemslist as $item)
+
             <li class="list-group-item">
-              <span class="text-muted">Item1 </span>
-              <span style="float: right"> $23 </span>
+                <span class="text-muted">{{$item->itm_name}}</span>
+                <span style="float: right">${{$item->itm_price}} </span>
             </li>
-            <li class="list-group-item">
-                <span class="text-muted">Item2 </span>
-                <span style="float: right"> $1.5 </span>
-            </li>
-            <li class="list-group-item"><span class="text-muted"> Item3 </span>
-              <span style="float: right"> $24.5 </span></li>
+
+            @endforeach
+
+            
           </ul>
      
     </div>
         
 </div>
+</form>  
 
 </div>
 

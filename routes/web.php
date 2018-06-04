@@ -18,6 +18,13 @@ Route::get('/', function () {
    // return view('chefs/profile');
 });
 
+Route::post('/pay','Stripe@stripepay');
+Route::get('/pay','Stripe@pay');
+
+Route::get('/payment/{id}', 'PaymentController@index');
+
+// Route::post('/payment','PaymentController@store');
+
 Route::get('/dishes', 'ChefController@index');
 Route::get('/chefs/{id}', 'ChefController@show');
 
@@ -73,14 +80,3 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

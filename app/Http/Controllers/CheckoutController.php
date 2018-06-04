@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\cart;
 
@@ -15,6 +16,13 @@ class CheckOutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
     public function index()
     {
         //
@@ -24,7 +32,7 @@ class CheckOutController extends Controller
 
         $cart_users = DB::table('cart')
                          ->join('menu_items','menu_items.id','=','cart.menu_item_id')   
-                         ->where('customer_id',2)
+                         ->where('customer_id',Session::get('userid'))
                          ->get();
 
         // var_dump($cart_users);                 
@@ -116,38 +124,50 @@ class CheckOutController extends Controller
     {
         //
 
+if(!Session::has('cart'))
+{
+return redirect()->route('/dishes');
+}
 
         $tmpid = $id;
-        $chef_det = DB::table('chef_users')->select('name')->where('id',$id)->first();
+        $itemslist = Session::get('cart');
+        // $chef_det = DB::table('chef_users')->select('name')->where('id',$id)->first();
         
-        $tmpname = $chef_det->name;
+        // $tmpname = $chef_det->name;
+        
     
-        $itemslist = DB::table('cart')
-                         ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
-                        //  ->select(DB::raw('SUM(menu_items.itm_price) as totsum'),'cart.*','menu_items.*')
-                         ->where('cart.customer_id',5)
-                         ->where('menu_items.chef_id',$tmpid)                      
-                         ->get(); 
+        // $itemslist = DB::table('cart')
+        //                  ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
+        //                 //  ->select(DB::raw('SUM(menu_items.itm_price) as totsum'),'cart.*','menu_items.*')
+        //                  ->where('cart.customer_id',5)
+        //                  ->where('menu_items.chef_id',$tmpid)                      
+        //                  ->get(); 
          
-        $sum = DB::table('cart')
-        ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
-        ->select(DB::raw('SUM(menu_items.itm_price) as totsum'))                       
-        ->where('cart.customer_id',5)
-        ->where('menu_items.chef_id',$tmpid)                      
-        ->get(); 
+        
+
+        // $sum = DB::table('cart')
+        // ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
+        // ->select(DB::raw('SUM(menu_items.itm_price) as totsum'))                       
+        // ->where('cart.customer_id',5)
+        // ->where('menu_items.chef_id',$tmpid)                      
+        // ->get(); 
 
         //  die(var_dump($tmpval));
-      $tmpsum = $sum[0]->totsum;
+    //   $tmpsum = $sum[0]->totsum;
     
+      $tmpsum = Session::get('cartamnt');
       $hst = round($tmpsum*0.13,2) ;
       
       $totsum =   $tmpsum + $hst ;
 
+      Session::put('totsum',$totsum);
+      $tmpname = Session::get('chefname');
       $tmparr = array();
       $tmparr[0] = $tmpname;
       $tmparr[1] = $tmpsum;
       $tmparr[2] = $hst;
       $tmparr[3] = $totsum;
+      $tmparr[4] = $tmpid;
       
 // var_dump($itemslist);
 

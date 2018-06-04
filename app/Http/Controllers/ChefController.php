@@ -36,11 +36,9 @@ class ChefController extends Controller
            $temps[$chef->id.'_'.$chef->name.'_'.$chef->profile_picture_path] = $menuitems;
 
        }
-    //    echo "<pre>";
-    //    var_dump($temp);
-    //    echo "</pre>";
 
-    return view('chefs.dishes')->with('temps',$temps);
+
+    return view('chefs.dishes2')->with('temps',$temps);
 
 
 

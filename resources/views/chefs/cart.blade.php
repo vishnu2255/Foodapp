@@ -35,15 +35,15 @@
        $totsum = $chefdet[2];
 ?>
 <div class="row" style="margin-top: 20px">
-    <div class="col-md-10">
+    <div class="col-md-10 col-sm-10">
             <h4 >
-                    <a href="/chefs/{{$chefid}}">  Chef {{$chefcnt}}: {{$chefname}}  </a>    
+                    <a href="/chefs/{{$chefid}}">  Chef : {{$chefname}}  </a>    
             </h4>
     </div>
 
-    <div class="col-md-2">
+    <div class="col-md-2 col-sm-2">
        
-    <button id="{{$chefid}}" class="btn btn-danger btn-lg showdrinks">Would You Like to Add Drinks? </button>    
+    {{-- <button id="{{$chefid}}" class="btn btn-danger btn-lg showdrinks">Would You Like to Add Drinks? </button>     --}}
         
 
     </div>

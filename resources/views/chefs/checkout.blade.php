@@ -19,7 +19,7 @@
 
 <div class="container">
 
-  <form action="/order" method="post">
+  {{-- <form action="/payment/{{$tmparr[4]}}" method="post"> --}}
       <h4>{{$tmparr[0]}} </h4>
 <div class="row">
 
@@ -54,9 +54,16 @@
 
           </select>
       </div>
+    <a href="/payment/{{$tmparr[4]}}">
+    <button class="btn btn-success btn-lg">
+        Pay Now
+    </button>        
+    </a>
+  
+
 
       
-      <div>
+      <div style="display: none" >
          
           <ul class="" id="payment_cc" style="list-style: none; float: left">
               <li>
@@ -155,7 +162,7 @@
     </div>
         
 </div>
-</form>  
+{{-- </form>   --}}
 
 </div>
 

@@ -21,7 +21,7 @@
                                       <label for="inputPassword2" class="sr-only input-lg"></label>
                                       <input type="text" style=" width:400px"  class="form-control" id="inputPassword2" placeholder="Enter you location">
                                     </div>
-                                    <a href="/chefs/" class="btn btn-primary">View Dishes</a>
+                                    <a href="/dishes/" class="btn btn-primary">View Dishes</a>
                             </form>
                       </div>
                     </div>
@@ -35,7 +35,7 @@
                                       <label for="inputPassword2" class="sr-only input-lg"></label>
                                       <input type="text" style=" width:400px"  class="form-control" id="inputPassword2" placeholder="Enter you location">
                                     </div>
-                                    <a href="/chefs/" class="btn btn-primary">View Dishes</a>
+                                    <a href="/dishes/" class="btn btn-primary">View Dishes</a>
                             </form>
                       </div>
                     </div>
@@ -49,7 +49,7 @@
                                       <label for="inputPassword2" class="sr-only input-lg"></label>
                                       <input type="text" style=" width:400px"  class="form-control" id="inputPassword2" placeholder="Enter you location">
                                     </div>
-                                    <a href="/chefs/" class="btn btn-primary">View Dishes</a>
+                                    <a href="/dishes/" class="btn btn-primary">View Dishes</a>
                             </form>
                       </div>
                     </div>

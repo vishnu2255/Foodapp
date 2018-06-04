@@ -256,7 +256,7 @@ function()
     // alert($(this).next());
 	$(this).hide();
 	$(this).next().show();
-	var id = $(this).attr("id");
+	var id = $(this).attr("id") + '_1';
 	itemslist.push(id);
 	
 	$.post('/cart',{'items' : itemslist,'_token': $('input[name=_token]').val()},function(data)

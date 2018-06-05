@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::post('/payment','PaymentController@store');
+// Route::post('/payment','PaymentController@store');
 
+Route::post('/payment','Stripe@check');
 Route::post('/pay','Stripe@stripepay');
 
 Route::post('/payment2',function () {
@@ -42,6 +43,6 @@ var_dump($_POST['totsumamnt']);
 //       dd("successpayment");
   });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

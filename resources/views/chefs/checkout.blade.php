@@ -29,14 +29,14 @@
     <ul class="list-group">
         <li class="list-group-item" style="background-color: orange">Order Details</li>
         <li class="list-group-item">
-          <span class="text-muted">Food & Bevarage Subtotal </span>
-          <span name="sumamnt" style="float: right"> ${{$tmparr[1]}} </span>
+          <span style="font-family: georgia,serif" class="">Food & Bevarage Subtotal </span>
+          <span  name="sumamnt" style="float: right" style="font-family: georgia,serif" > ${{$tmparr[1]}} </span>
         </li>
         <li class="list-group-item">
-            <span class="text-muted">HST </span>
+            <span style="font-family: georgia,serif" class="">HST </span>
             <span name="hst" style="float: right"> ${{$tmparr[2]}} </span>
         </li>
-        <li class="list-group-item"><span> <b>Total</b> </span>
+        <li class="list-group-item"><span style="font-family: georgia,serif"> <b>Total</b> </span>
           <span name="totsum" style="float: right"> ${{$tmparr[3]}} </span></li>
       </ul>
 
@@ -44,18 +44,18 @@
 
       <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">Payment Method</label>
+            <label class="input-group-text" for="inputGroupSelect01" style="background-color: burlywood">Payment Method</label>
           </div>
           <select class="custom-select" name="payment_option" id="inputGroupSelect01">
             
-            <option value="1" selected >Credit Card</option>
-            <option value="2">Cash</option>
-            <option value="3">Interact</option>
+            <option value="1" style="font-family: georgia,serif" selected> <b>Credit Card</b></option>
+            {{-- <option value="2">Cash</option>
+            <option value="3">Interact</option> --}}
 
           </select>
       </div>
-    <a href="/payment/{{$tmparr[4]}}">
-    <button class="btn btn-success btn-lg">
+    <a href="/pay">
+    <button style="width: 300px" class="btn btn-success btn-lg">
         Pay Now
     </button>        
     </a>
@@ -150,7 +150,7 @@
             @foreach($itemslist as $item)
 
             <li class="list-group-item">
-                <span class="text-muted">{{$item->itm_name}}</span>
+                <span class=" ">{{$item->itm_name}}</span>
                 <span style="float: right">${{$item->itm_price}} </span>
             </li>
 

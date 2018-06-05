@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -261,6 +264,11 @@ function()
 	
 	$.post('/cart',{'items' : itemslist,'_token': $('input[name=_token]').val()},function(data)
 	{		
+		// console.log(data);
+
+        var cartdata = data.split('_');
+        $("#cartitems").text(cartdata[1]); 
+        // $(spanele).text(cartdata[0]);	
 		console.log(data);
 	});
 

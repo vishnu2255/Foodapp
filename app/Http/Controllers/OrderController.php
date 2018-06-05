@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        // dd(Session::all());
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +21,7 @@ class OrderController extends Controller
     public function index()
     {
         //
+        return view('orders');
     }
 
     /**

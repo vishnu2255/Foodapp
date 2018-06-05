@@ -30,7 +30,8 @@ class CartController extends Controller
 
         if(!Session::has('cartamnt'))
         {
-            return redirect()->back();
+            // return redirect()->back();
+            return redirect('/dishes');
         }
 
         // dd("fail");
@@ -39,6 +40,7 @@ class CartController extends Controller
                          ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
                          ->select('menu_items.chef_id')  
                          ->where('customer_id',$user->id)
+                         ->where('cart.isActive','=','yes')
                          ->distinct()
                          ->get();
 
@@ -58,7 +60,8 @@ class CartController extends Controller
         $tmpval = DB::table('cart')
                          ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
                          ->where('cart.customer_id',$user->id)
-                         ->where('menu_items.chef_id',$tmpid)                      
+                         ->where('menu_items.chef_id',$tmpid)  
+                         ->where('cart.isActive','=','yes')                    
                          ->get(); 
          
         Session::put('cart',$tmpval);                 
@@ -66,11 +69,22 @@ class CartController extends Controller
 
         $sum = DB::table('cart')
         ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
-        ->select(DB::raw('SUM(menu_items.itm_price) as totsum'))                       
+        ->select(DB::raw('SUM(menu_items.itm_price*cart.qty) as totsum'))                       
         ->where('cart.customer_id',$user->id)
-        ->where('menu_items.chef_id',$tmpid)                      
+        ->where('menu_items.chef_id',$tmpid)   
+        ->where('cart.isActive','=','yes')                    
         ->get(); 
 
+        $carttot = DB::table('cart')
+        // ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
+        ->select(DB::raw('SUM(cart.qty) as totcnt'))                       
+        ->where('cart.customer_id',$user->id)
+        // ->where('menu_items.chef_id',$tmpid)   
+        ->where('cart.isActive','=','yes')                    
+        ->get(); 
+        
+        $cnt = $carttot[0]->totcnt;
+        Session::put('carttot',$cnt);
 // // die(var_dump($sum[0]->totsum));
 $tmpsum = $sum[0]->totsum;
 Session::put('cartamnt',$tmpsum);    
@@ -132,20 +146,20 @@ $tmpkey = $tmpid . '_' . $tmpname.'_'.$tmpsum;
   
 
         $getcnt = DB::table('cart')
-        // ->where('customer_id ','=',5)
+        ->where('isActive','=','yes')
         ->where('menu_item_id','=',$it)
         ->where('customer_id','=',$user->id)
         ->get();
 
     //   return $getcnt;
-        //  return $getcnt->count();
+    //   return $getcnt->count();
 
        if($getcnt->count() > 0)
 {
     $getcnt = DB::table('cart')
-    // ->where('customer_id ','=',5)
     ->where('menu_item_id','=',$it)
     ->where('customer_id','=',$user->id)
+    ->where('isActive','=','yes')
     ->update(['qty' => $qty]);
 
 
@@ -154,7 +168,7 @@ else
 {
         DB::table('cart')
             ->insert([
-                ['customer_id' => $user->id , 'menu_item_id'=> $it  , 'qty' => 1]
+                ['customer_id' => $user->id , 'menu_item_id'=> $it  , 'qty' => 1 , 'isActive' => 'yes' ,]
             ]);
 
 }
@@ -164,6 +178,7 @@ $totsumamnt = DB::table('cart')
 ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
 ->select(DB::raw('SUM(menu_items.itm_price*cart.qty) as totsum'))                       
 ->where('cart.customer_id',$user->id)
+->where('cart.isActive','=','yes')
 ->where('menu_items.chef_id',$cd)                      
 ->get(); 
 
@@ -171,8 +186,31 @@ $am = $totsumamnt[0]->totsum;
 
 Session::put('cartamnt',$am);
 
+$carttot = DB::table('cart')
+// ->join('menu_items','menu_items.id','=','cart.menu_item_id') 
+->select(DB::raw('SUM(cart.qty) as totcnt'))                       
+->where('cart.customer_id',$user->id)
+// ->where('menu_items.chef_id',$tmpid)   
+->where('cart.isActive','=','yes')                    
+->get(); 
+
+$cnt = $carttot[0]->totcnt;
+Session::put('carttot',$cnt);
+
+// return $cnt;
+
+$tmpval = DB::table('cart')
+->join('menu_items','menu_items.id','=','cart.menu_item_id') 
+->where('cart.customer_id',$user->id)
+->where('menu_items.chef_id',$cd)  
+->where('cart.isActive','=','yes')                    
+->get(); 
+
+Session::put('cart',$tmpval); 
+
+
 // die(var_dump($tmpval[0]->totsum));
-return Session::get('cartamnt');
+return Session::get('cartamnt') . '_' . Session::get('carttot');
     }
 
     /**

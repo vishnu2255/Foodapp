@@ -18,12 +18,16 @@ Route::get('/', function () {
    // return view('chefs/profile');
 });
 
+Route::get('/orders', 'OrderController@index' );
+
 Route::post('/pay','Stripe@stripepay');
+
+Route::post('/store','Stripe@store');
 Route::get('/pay','Stripe@pay');
 
 Route::get('/payment/{id}', 'PaymentController@index');
 
-// Route::post('/payment','PaymentController@store');
+Route::post('/payment','Stripe@check');
 
 Route::get('/dishes', 'ChefController@index');
 Route::get('/chefs/{id}', 'ChefController@show');

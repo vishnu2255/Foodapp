@@ -9,6 +9,12 @@ use App\menu_items;
 
 class ChefController extends Controller
 {
+
+    public function __construct()
+    {
+        // dd(Session::all());
+        $this->middleware('auth');
+    } 
     /**
      * Display a listing of the resource.
      *

@@ -17,8 +17,85 @@ class Stripe extends Controller
 //  dd(Session::all());
     }
 
+    public function check(Request $request)
+    {
+dd($request->all());
+//  dd(Session::all());
+    }
+
+
+    public function store(Request $request)
+    {
+// dd($request->all());
+
+if(!Session::has('cart'))
+{
+return redirect('/dishes');
+}
+
+\Stripe\Stripe::setApiKey("sk_test_j2XNbl89OnvzjQNkHV7KHaeV");
+    $token = $_POST['stripeToken'];
+
+    try{
+
+        $customer = \Stripe\Customer::Create(array(
+            'email' => Session::get('email'),
+            'source' => $token,
+        ));
+        $am = (float)Session::get('totsum');
+        $am =$am*100;
+
+        $charge = \Stripe\Charge::create([
+            'amount' => $am,
+            'currency' => 'cad',
+            'description' => 'Example charge',
+            // 'source' => $token,
+            'customer' => $customer->id,             
+            ]);
+
+            $cart = serialize(Session::get('cart'));
+        DB::table('orders')
+        ->insert(
+            [  'chef_id' => Session::get('chefid'),
+               'customer_id' => Session::get('userid'),
+               'menu_item_id' => 1,
+               'payment_id' => $charge->id,
+               'cart'  => $cart, 
+               'totalamnt' => Session::get('totsum') ,
+               'isActive'  => 'yes'
+            ]
+        );
+
+        DB::table('cart')
+        ->where('customer_id','=',Session::get('userid'))
+        ->where('isActive','=','yes')
+        ->update(['isActive' => 'no']);
+
+        Session::forget('cartamnt');
+        Session::forget('totsum');
+        Session::forget('cart');
+        Session::forget('carttot');
+        // Session::forget('chefid');
+
+        // return redirect()->action('OrderController@Index',['status','success']);
+            return redirect('/orders')->with('status','Success');
+    }
+    catch(\Exception $e)
+    {
+        // return redirect('/cart')->with('status','Failed');
+        echo $e->getMessage();
+    }
+
+//  dd(Session::all());
+    }
+
     public function pay()
     {
+        if(!Session::has('cart'))
+        {
+            return redirect('/dishes');
+
+        }
 
         return view('stripe');
     }

@@ -37,7 +37,7 @@
 <div class="row" style="margin-top: 20px">
     <div class="col-md-10 col-sm-10">
             <h4 >
-                    <a href="/chefs/{{$chefid}}">  Chef : {{$chefname}}  </a>    
+                    <a href="/chefs/{{$chefid}}" style="font-family: georgia,serif"> <b> {{$chefname}} </b> </a>    
             </h4>
     </div>
 
@@ -146,16 +146,13 @@
     </div>
 </div>
       <div class="row" style="margin: 20px">
-          <div class="col-md-3">
-                <a href="/checkout/{{$chefid}}"  class="btn btn-warning btn-lg" style="float: left" id="checkout_{{$chefid}}" >Proceed to Checkout</a>            
+          <div class="col-md-6">
+                <a href="/checkout/{{$chefid}}"  class="btn btn-success btn-lg" style="float: left" id="checkout_{{$chefid}}" >Proceed to Checkout</a>            
           </div>
     
-          <div class="col-md-4">
-              Total
-          </div>
           
-          <div class="col-md-4">
-                <span class="" style="color: red" >CDN$</span> <span id="tot_{{$chefid}}"> {{$totsum}}</span>   
+          <div class="col-md-4" style="float:right">
+               <span style="font-family: georgia,serif">Total:  </span> <span class="" style=""> $ </span> <span id="tot_{{$chefid}}"> {{$totsum}}</span>   
           </div>
 
 

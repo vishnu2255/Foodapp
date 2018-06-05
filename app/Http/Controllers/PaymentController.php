@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\cart;
+use App\Tempcart;
+
 
 
 class PaymentController extends Controller
@@ -26,12 +28,21 @@ class PaymentController extends Controller
     
     public function index()
     {
-        $user = Auth::user();  
-        echo $user->id;
-        // $cart = serialize(Session::get('cart'));
-        // dd($cart);
+        $tm = new Tempcart();
+        $tm->setSession();
+        // dd(Tempcart::$tesm);
 
-        // dd(Session::all());
+        // return 123;
+        $user = Auth::user();  
+        // echo $user->id;
+
+        // $tm = new Tempcart();
+        // $tm->setSession();
+        // // dd($tm->cartamnt);
+        // $tm->getDetails();
+
+        // $cart = serialize(Session::get('cart'));
+   
 
         // $request->session()->put('test',123);
         $sum= Session::get('cartamnt');
@@ -67,7 +78,12 @@ class PaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    { 
+        // dd(Tempcart::$tesm);
+        // $tm = new Tempcart();
+        // $tm->setSession();
+        // dd($tm->cartamnt);  
+        // dd(Tempcart::$tesm);
         dd(Session::all());
 
         // $user = Auth::user();  

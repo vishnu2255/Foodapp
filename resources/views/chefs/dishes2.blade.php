@@ -23,6 +23,31 @@
                     <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                     <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                 @else
+
+                
+                        
+                <li>                                
+                        <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:36px; color: gold" class="fa fa-shopping-cart"></i>
+                            <span id="cartitems"> 
+                            <?php if(Session::has('carttot')) :?>
+
+                                {{Session::get('carttot')}} 
+                            <?php else : ?>
+                            0
+                            <?php endif;?>
+                            </span>
+                        </a> 
+                </li>
+
+               
+
+          
+                    {{-- <li>
+                            <a  class="btn btn-info btn-lg" style="width: 150px; margin-top: 10px; background-color: gold">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart 22
+                            </a>
+                    </li> --}}
+                
                     <li class="dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
@@ -46,21 +71,16 @@
     </div>
 </nav>
 
-@if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-@endif
+
 
 <div class="container" style="margin-top: 100px">
 
 
-    
-       <a href="/checkout">
+       {{-- <a href="/checkout">
         <button class="btn btn-primary" href="" id="check_out" style="float: right">
          Checkout
         </button>
-    </a>
+    </a> --}}
 
 <div class="itemslist" id="itemslist">
 
@@ -128,19 +148,32 @@
 
     <div class="col-sm-4">
             <div class="thumb-wrapper">
-                <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                {{-- <span class="wish-icon"><i class="fa fa-heart-o"></i></span> --}}
                 <div class="img-box">
                     <img src="../images/food_2.jpg" class="img-responsive img-fluid" alt="">									
                 </div>
                 <div class="thumb-content">
-
-                    <h4>{{$item->itm_name}}</h4>									
+<div class="row">
+        <div class="col-sm-7">
+                <p class="text-muted" style="font-family: 'Times New Roman', Times, serif; color: red" >{{$item->itm_name}}</p>	 
+                <p class="text-muted" style="font-family: 'Times New Roman', Times, serif; " >{{$item->itm_desc}}</p>	
+               
+            </div>
+            <div class="col-sm-5">
+                    <p class="item-price" style="font-family: 'Times New Roman', Times, serif; color: red"  id="{{$item->id}}"> Price <b>${{$item->itm_price}}</b></p>    
+                    {{-- <p style="font-family: 'Times New Roman', Times, serif; color: red">{{$item->itm_order_prep_time}} mints</p>
+                                                      --}}
+                                                      <p class="text-muted"> Points: {{$item->itm_price*20}}</p>
+               </div>
+</div>                 
+                 
                 
-                    <p class="item-price" id="{{$item->id}}"> <b>{{$item->itm_price}}</b></p>
-                    
-                    <button id="{{$item->id.'_'.$chefid}}" class="btn btn-primary item-btn1">Add to Cart</button>
+                   
 
-                    <a href="/cart" id="gotocartbtn" class="btn btn-warning gotocart" style="display:none">Go to Cart </a>
+
+                    <button id="{{$item->id.'_'.$chefid}}" class="btn btn-success item-btn1">Add to Cart</button>
+
+                    <a href="/cart" id="gotocartbtn" class="btn btn-danger gotocart" style="display:none">Go to Cart </a>
 
                 </div>						
             </div>
@@ -154,10 +187,10 @@
                                      
     @endforeach
 
-    <a class="carousel-control left carousel-control-prev" href="#myCarousel{{$carid}}" data-slide="prev">
+    <a class="carousel-control left carousel-control-prev" style="background-color: red"  href="#myCarousel{{$carid}}" data-slide="prev">
         <i class="fa fa-angle-left"></i>
     </a>
-    <a class="carousel-control right carousel-control-next" href="#myCarousel{{$carid}}" data-slide="next">
+    <a class="carousel-control right carousel-control-next" style="background-color: red" href="#myCarousel{{$carid}}" data-slide="next">
         <i class="fa fa-angle-right"></i>
     </a>
 

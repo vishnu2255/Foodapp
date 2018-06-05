@@ -55,6 +55,9 @@
     var arr= id.split('_');
     var chefid  =  arr[1];
     var spanele = "#tot_"+chefid;
+    // var cartele = "cartitems";
+
+
     if(arr.length == 2)
     {
         id = id + '_' + qty ; 
@@ -71,7 +74,9 @@
 // alert(id);	
 	$.post('/cart',{'items' : itemslist,'_token': $('input[name=_token]').val()},function(data)
 	{	
-        $(spanele).text(data);	
+        var cartdata = data.split('_');
+        $("#cartitems").text(cartdata[1]); 
+        $(spanele).text(cartdata[0]);	
 		console.log(data);
 	});
                     // alert(true);
@@ -88,6 +93,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div id="app">
@@ -107,12 +113,27 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
+
+  
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
+
+                        <li>                                
+                                <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:36px; color: gold" class="fa fa-shopping-cart"></i>
+                                    <span id="cartitems"> 
+                                    <?php if(Session::has('carttot')) :?>
+        
+                                        {{Session::get('carttot')}} 
+                                    <?php else : ?>
+                                    0
+                                    <?php endif;?>
+                                    </span>
+                                </a> 
+                        </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

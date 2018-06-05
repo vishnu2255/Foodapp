@@ -56,7 +56,7 @@
   </body>
   <div class="container">
     <h3 style="margin-top: 20px" name="totsumamnt" > Total : {{$sum}} </h3>
-  <form action="/api/pay" method="post" id="payment-form">
+  <form action="/api/payment" method="post" id="payment-form">
     {{ csrf_field() }}
     {{-- <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}"> --}}
 
@@ -164,6 +164,12 @@ function stripeTokenHandler(token) {
   hiddenInput.setAttribute('value', token.id);
   form.appendChild(hiddenInput);
 
+// var tm = document.createElement('input');
+// tm.setAttribute('name','test');
+// tm.setAttribute('value', 'vishnu');
+// tm.setAttribute('type', 'hidden');
+
+// form.appendChild(tm);
   // Submit the form
   form.submit();
 }

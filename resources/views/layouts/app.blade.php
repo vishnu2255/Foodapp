@@ -16,6 +16,7 @@
 
 
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -123,13 +124,14 @@
                         @else
 
                         <li>                                
-                                <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:36px; color: gold" class="fa fa-shopping-cart"></i>
+                                <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:36px; color: red" class="fa fa-shopping-cart"></i>
                                     <span id="cartitems"> 
                                     <?php if(Session::has('carttot')) :?>
-        
-                                        {{Session::get('carttot')}} 
+                                    <strong>
+                                    {{Session::get('carttot')}} 
+                                    </strong>                                            
                                     <?php else : ?>
-                                    0
+                                   <strong>0</strong>
                                     <?php endif;?>
                                     </span>
                                 </a> 
@@ -162,5 +164,7 @@
         </main>
     </div>
     {{csrf_field()}}
+
+    @include('layouts.foot')
 </body>
 </html>

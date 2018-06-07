@@ -27,13 +27,15 @@
                 
                         
                 <li>                                
-                        <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:36px; color: gold" class="fa fa-shopping-cart"></i>
+                        <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:36px; color: red" class="fa fa-shopping-cart"></i>
                             <span id="cartitems"> 
                             <?php if(Session::has('carttot')) :?>
-
-                                {{Session::get('carttot')}} 
+                            <strong>
+                            {{Session::get('carttot')}} 
+                            </strong>                                
                             <?php else : ?>
-                            0
+                           <strong>0
+                           </strong>
                             <?php endif;?>
                             </span>
                         </a> 
@@ -209,3 +211,5 @@
 @endforeach
 
 </div>
+
+@include('layouts.foot')

@@ -11,6 +11,14 @@ use App\cart;
 
 class Stripe extends Controller
 {
+
+    public function __construct()
+    {
+        // dd(Session::all());
+        $this->middleware('auth');
+    }
+
+    
     public function stripepay(Request $request)
     {
 

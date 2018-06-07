@@ -21,7 +21,30 @@ class OrderController extends Controller
     public function index()
     {
         //
-        return view('orders');
+        $user = Auth::user();      
+        // var_dump($user->id);
+
+        $curentorder = DB::table('orders')
+                         ->join('chef_users','orders.chef_id','=','chef_users.id')
+                         ->select('chef_users.name','orders.id','orders.totalamnt','orders.created_date','orders.cart')   
+                         ->where('orders.customer_id',$user->id)
+                         ->where('orders.isActive','yes')
+                         ->get();
+
+                         $oldorders = DB::table('orders')
+                         ->join('chef_users','orders.chef_id','=','chef_users.id')
+                         ->select('chef_users.name','orders.id','orders.totalamnt','orders.created_date')   
+                         ->where('orders.customer_id',$user->id)
+                         ->where('orders.isActive','no')
+                         ->get();
+
+                //   var_dump(unserialize($order[0]->cart));
+
+
+                        //  $curentorder = $order[0];
+        return view('orders')->with('curentorder',$curentorder)->with('oldorders',$oldorders);
+
+        // var_dump($curentorder[0]->totalamnt);
     }
 
     /**

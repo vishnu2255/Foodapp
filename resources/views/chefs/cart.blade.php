@@ -64,29 +64,50 @@
             <th scope="col">Price</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           <?php $id=0; ?>
           @foreach($value as $cartitem)
           <tr>
             <?php $id++;?>
           <th scope="row">{{$id}}</th>
             <td>
-                <h6 class="my-0">{{$cartitem->itm_name}}</h6>
-                <small class="text-muted">{{$cartitem->itm_desc}}</small>
+                <h6 class="my-0" style="font-size: 30px;" > <strong> {{$cartitem->itm_name}} </strong> </h6>
+                <small class="text-muted" style="font-size: 15px;"> {{$cartitem->itm_desc}}</small>
             </td>
             <td>
               {{-- <button> --}}
               {{-- <span>Qty: </span>   --}}
-              <input type="number" id="{{$cartitem->menu_item_id.'_'.$cartitem->chef_id}}" class="form-control btnquantitycart" name="quantity" min="1" max="10" value="{{$cartitem->qty}}" style="text-align: center;width: 70px">
+              {{-- <input type="number" id="{{$cartitem->menu_item_id.'_'.$cartitem->chef_id}}" class="form-control btnquantitycart" name="quantity" min="1" max="10" value="{{$cartitem->qty}}" style="text-align: center;width: 70px"> --}}
+              {{-- <span></span>
+              <input type="text" id="{{$cartitem->menu_item_id.'_'.$cartitem->chef_id}}" class="form-control btnquantitycart" name="quantity" maxlength="2" value="{{$cartitem->qty}}" style="text-align: center;width: 70px">
+              <span></span> --}}
+
+              <div class="input-group">
+               
+                    <button type="button"  class="btn btn-info btn-circle quantity-left-minus  btn-number"  data-type="minus" data-field="">
+                      {{-- <span class="glyphicon glyphicon-minus"></span> --}}
+                      <ion-icon name="remove"></ion-icon>
+                    </button>
+           
+                <input type="text" style="font-size: 20px;" id="{{$cartitem->menu_item_id.'_'.$cartitem->chef_id}}" class="btnquantitycart" value="{{$cartitem->qty}}"  name="quantity" style="width: 50px; text-align:center"  size="2" maxlength="2">
+            
+                    <button type="button" class="btn btn-info btn-circle quantity-right-plus  btn-number" data-type="plus" data-field="">
+                        {{-- <span class="glyphicon glyphicon-plus"></span> --}}
+                        <ion-icon name="add"></ion-icon>
+                    </button>
+              
+            </div>
+
+
               {{-- </button> --}}
               {{-- {{$cartitem->qty}} --}}
             </td>
-            <td>{{$cartitem->itm_price}}</td>
+            <td ><span style="font-size: 30px;">  {{$cartitem->itm_price}} </span>  </td>
 
             <td>
             <button type="button" id="rem_{{$cartitem->menu_item_id}}" class="btn btn-danger btn-sm removebtn" aria-label="Left Align">
-                          Remove
-                    </button>
+                <ion-icon name="close"></ion-icon>
+             </button>
             </td>
           </tr>
           
@@ -111,14 +132,14 @@
 
 <table class="table table-hover" style="margin: 20px">
         <thead>
-          <tr>
+          <tr class="well-flat">
             <th scope="col">SNo</th>
             <th scope="col">Drink</th>
             <th scope="col">Quantity</th>
             <th scope="col">Price</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="well-flat">
 
         @foreach($dr as $dname=>$dvalue)
 <tr>
@@ -135,7 +156,7 @@
 </td>
 {{-- <td>  {{$dvalue->qty}}</td> --}}
 
-<td> {{$dvalue->price}} </td>
+<td> <span style="font-size: 30px;"> {{$dvalue->price}} </span> </td>
 
 </tr>
         @endforeach
@@ -147,12 +168,12 @@
 </div>
       <div class="row" style="margin: 20px">
           <div class="col-md-6">
-                <a href="/checkout/{{$chefid}}"  class="btn btn-success btn-lg" style="float: left" id="checkout_{{$chefid}}" >Proceed to Checkout</a>            
+                <a href="/checkout/{{$chefid}}"  class="btn btn-primary btn-lg" style="float: left; background-color : #479f55" id="checkout_{{$chefid}}" >Proceed to Checkout</a>            
           </div>
     
           
-          <div class="col-md-4" style="float:right">
-               <span style="font-family: georgia,serif">Total:  </span> <span class="" style=""> $ </span> <span id="tot_{{$chefid}}"> {{$totsum}}</span>   
+          <div class="col-md-4" style="float:right; color: yellow">
+               <span  style="font-size: 30px;" class="well-flat"><strong> Total:  </strong> </span> <span class="" style="font-size: 30px;"> $ </span> <span style="font-size: 30px;" id="tot_{{$chefid}}"> {{$totsum}}</span>   
           </div>
 
 

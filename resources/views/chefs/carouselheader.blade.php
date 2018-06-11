@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap Multiple Item Product Carousel</title>
+<title>Dishes  </title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -15,6 +15,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
+
+.zoom:hover {
+     -ms-transform: scale(2); /* IE 9 */
+     -webkit-transform: scale(2); 	
+     transform: scale(2);  
+	 z-index: 100; 
+}
+
 body {
 	background: #e2eaef;
 	font-family: "Open Sans", sans-serif;
@@ -195,6 +203,26 @@ height: 120px;
 
 <script type="text/javascript">
 	$(document).ready(function(){
+
+
+		$(".zoom").mouseover(function(){
+			// var sr= $(this).attr("src");
+			// $(this).zoom({url: sr});
+			$(this)
+    // .wrap('<span style="display:inline-block"></span>')
+    // .css('display', 'block')
+    // .parent()
+    // .zoom();
+
+
+			$(this).css("cursor","pointer");
+			// $(this).css("width","500px");
+			// $(this).animate({width: "500px"},"slow");
+
+
+		});
+
+
 		$(".wish-icon i").click(function(){
 			$(this).toggleClass("fa-heart fa-heart-o");
 		});

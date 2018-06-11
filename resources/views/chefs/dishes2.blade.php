@@ -101,17 +101,17 @@
     <?php $chefid = explode('_',$key)[0]; ?>
 
         <div class="col-md-2 col-sm-2" style="margin-left: 0px">
-                <div class="chefimage" style="height: 120px; width: 100%; margin-top: 100px">
+                <div class="chefimage" style="height: 170px; width: 100%; margin-top:75px">
                 <a href="/chefs/{{explode('_',$key)[0]}}">                        
-                    <img src="../images/chef_1.jpeg" alt="image" class="img-circle" width="100%" height="100%">
-                    </a>   
-                </div>	
+                    <img src="../images/chef_1.jpeg" alt="image" class="img-circle" width="100%" >
+                </a>   
+        </div>	
         
                 <div class="chef-content">
-                        <h4 >{{explode('_',$key)[1]}}</h4>									
+                        <h4>{{explode('_',$key)[1]}}</h4>									
                         <div class="star-rating">
                             <ul class="list-inline" >
-                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                <li class="list-inline-item"><i style="color:#c2a56d" class="fa fa-star"></i></li>
                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -152,7 +152,7 @@
             <div class="thumb-wrapper">
                 {{-- <span class="wish-icon"><i class="fa fa-heart-o"></i></span> --}}
                 <div class="img-box">
-                    <img src="../images/food_2.jpg" class="img-responsive img-fluid" alt="">									
+                    <img src="../images/food_2.jpg" class="img-responsive img-fluid zoom" alt="">									
                 </div>
                 <div class="thumb-content">
 <div class="row">

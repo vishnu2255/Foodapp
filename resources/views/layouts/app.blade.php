@@ -20,6 +20,53 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
+
+            $('.quantity-right-plus').click(function(e)
+            {
+                e.preventDefault();
+                // var qty = parseInt($("#quantity").val());
+                var qty = parseInt($(this).parent().find("input").val());
+                var obj = $(this).parent().find("input");               
+
+                if(qty==10)
+                {
+
+                }
+                else{
+                obj.val(qty+1);
+                obj.trigger("change");
+                }
+
+                // alert(qty);
+
+               
+
+            });
+
+
+            $('.quantity-left-minus').click(function(e)
+            {
+                e.preventDefault();
+
+                // var qty = parseInt($("#quantity").val());
+                var qty = parseInt($(this).parent().find("input").val());
+                // alert(qty);
+                var obj = $(this).parent().find("input");
+
+                if(qty==1)
+                {
+
+                }
+                else{
+                    // $("#quantity").val(qty-1);
+                    // obj.attr("value",qty-1);
+                    obj.val(qty-1);
+                    obj.trigger("change");
+                }
+                
+            });
+
+
             
             $('[data-toggle="tooltip"]').tooltip();
 
@@ -49,6 +96,8 @@
         //cart items section
         $(".btnquantitycart").change(
                 function(){
+
+                    // alert(2);
     var itemslist = [];
 	var id = $(this).attr("id");
     var qty = $(this).val();
@@ -98,11 +147,13 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color:#e77748">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" style="color:white" >
                     {{ config('app.name', 'Takeout') }}
+                    
                 </a>
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -119,19 +170,20 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                            <li><a class="nav-link" style="color:white" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                            <li><a class="nav-link" style="color:white" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
 
                         <li>                                
-                                <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:36px; color: red" class="fa fa-shopping-cart"></i>
+                                <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:36px; color: white" class="fa fa-shopping-cart"></i>
                                     <span id="cartitems"> 
                                     <?php if(Session::has('carttot')) :?>
                                     <strong>
                                     {{Session::get('carttot')}} 
                                     </strong>                                            
                                     <?php else : ?>
-                                   <strong>0</strong>
+                                    
+                                    <span style="color:white">  0</span>                                   
                                     <?php endif;?>
                                     </span>
                                 </a> 

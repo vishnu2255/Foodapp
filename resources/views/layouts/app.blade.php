@@ -13,8 +13,7 @@
     <!-- Scripts -->
 
     <script src="https://js.stripe.com/v3/"></script>
-
-
+  
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -218,5 +217,14 @@
     {{csrf_field()}}
 
     @include('layouts.foot')
+    <script src="{{ asset('js/mapscript.js') }}" defer></script>
+
+    {{-- <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_WSJDMq65r3I68pWo_qBhs4kOov7ab4k">
+
+    async defer></script> --}}
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_WSJDMq65r3I68pWo_qBhs4kOov7ab4k&libraries=places"  async defer></script>
+
 </body>
 </html>

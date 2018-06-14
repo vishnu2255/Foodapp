@@ -121,7 +121,7 @@ $d = DB::table('drinkscart')
                   $drinks = DB::table('drinks')
                                   ->where('chef_id',$tmpid)
                                     ->get();
-                        //   Session::put('drinks',$drinks);
+                        //    Session::put('drinks',$drinks);
         }
 
 // $tmpsum = Session::get('cartamnt');

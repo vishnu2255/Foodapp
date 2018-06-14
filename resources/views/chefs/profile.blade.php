@@ -49,7 +49,7 @@
   </tr>
 </table>
 <br><br>
-<a href="/chefs/" class="btn btn-warning btn-lg active" role="button">Back to Menu</a>
+<a href="/dishes/" class="btn btn-warning btn-lg active" role="button">Back to Menu</a>
 
       </div>
       <div class="col-md-4 col-md-pull-8">

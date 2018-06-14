@@ -26,7 +26,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();      
+        $user = Auth::user();            
 
         if(!Session::has('cartamnt'))
         {
@@ -43,6 +43,7 @@ class CartController extends Controller
                          ->where('cart.isActive','=','yes')
                          ->distinct()
                          ->get();
+                        
 
     //    die(var_dump($cart_chefs));
        $finalarray = array();
@@ -63,6 +64,9 @@ class CartController extends Controller
                          ->where('menu_items.chef_id',$tmpid)  
                          ->where('cart.isActive','=','yes')                    
                          ->get(); 
+
+                           
+
          
         Session::put('cart',$tmpval);                 
         // var_dump($tmpval);
@@ -84,11 +88,44 @@ class CartController extends Controller
         ->get(); 
         
         $cnt = $carttot[0]->totcnt;
+
+
+
+
+
         Session::put('carttot',$cnt);
 // // die(var_dump($sum[0]->totsum));
 $tmpsum = $sum[0]->totsum;
+
 Session::put('cartamnt',$tmpsum);    
+
+$d = DB::table('drinkscart')
+    ->where('user_id',$user->id)
+    ->where('isActive','=','yes')
+    ->get();
+
+        if($d->count()>0)
+        {
+            $tmpsum = $tmpsum + Session::get('drnkssum');
+       $drinks =  DB::table('drinks')
+            ->leftjoin('drinkscart','drinks.id','=','drinkscart.drinkid')
+            ->where('drinks.chef_id','=',$user->id)
+            ->get();
+      // die(var_dump($tmpdb));
+
+
+        }
+
+        else
+        {
+                  $drinks = DB::table('drinks')
+                                  ->where('chef_id',$tmpid)
+                                    ->get();
+                        //   Session::put('drinks',$drinks);
+        }
+
 // $tmpsum = Session::get('cartamnt');
+Session::put('cartdrnkssum',$tmpsum);
 $tmpkey = $tmpid . '_' . $tmpname.'_'.$tmpsum;
 
 
@@ -99,10 +136,10 @@ $tmpkey = $tmpid . '_' . $tmpname.'_'.$tmpsum;
 
 
 // echo "<pre>";
-// var_dump($finalarray);
+// var_dump($drinks);
 // echo"</pre>";
 
-               return view('chefs.cart')->with('chefcarts',$finalarray);
+        return view('chefs.cart')->with('chefcarts',$finalarray)->with('drinks',$drinks);
 
 
         //                  return view('chefs.cart')->with('cartitems',$cart_users);
@@ -126,7 +163,76 @@ $tmpkey = $tmpid . '_' . $tmpname.'_'.$tmpsum;
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
+        $user = Auth::user();      
+        if($request->has('ite'))
+        {
+            $drinks = ($request['ite']);
+        //    return $drinks;
+           $tmp=0;
+
+           foreach ($drinks as $key => $value) {
+             if($value!=null)
+             {
+                $drinkid = $key;
+                $drinkqty = $value;
+ 
+              // return $key.$value;
+                $drnkssum = DB::table('drinks')
+                            ->select('drnk_price')                           
+                            ->where('id',$drinkid)
+                            ->get();
+                $tmp = $tmp + $value * ($drnkssum[0]->drnk_price);
+                $dsum = $value * ($drnkssum[0]->drnk_price);
+// return $dsum;
+                $ct = DB::table('drinkscart')
+                ->where('drinkid','=',$drinkid) 
+                ->where('user_id','=',$user->id)
+                ->where('isActive','=','yes')
+                              
+               
+                ->get();
+        
+            //   return $ct->count();
+            //   return $getcnt->count();
+        
+               if($ct->count() > 0)
+        {
+            $upda = DB::table('drinkscart')
+            ->where('drinkid','=',$drinkid)
+            ->where('user_id','=',$user->id)
+            ->where('isActive','=','yes')
+            ->update(['drnkqty' => $value,'drnkscost' => $dsum]);              
+        }
+        else
+        {
+                DB::table('drinkscart')
+                    ->insert([
+                        ['user_id' => $user->id , 'drinkid'=> $drinkid  , 'drnkqty' => $value , 'isActive' => 'yes' ,'chefid'=>Session::get('chefid') , 'drnkscost'=>$dsum] 
+
+                   ]);
+        
+        }
+
+        $drinkssec = DB::table('drinkscart')       
+        ->join('drinks','drinkscart.drinkid','=','drinks.id')
+        ->where('drinkscart.user_id','=',$user->id)
+        ->where('drinkscart.isActive','=','yes')
+        ->get();
+        Session::put('drinks',$drinkssec);
+
+             }
+           }
+
+           Session::put('drnkssum',$tmp);
+           Session::put('cartdrnkssum',Session::get('cartamnt')+$tmp);
+        return Session::get('cartamnt')+$tmp;
+
+        }
+        else{
+            //return 123;
+
+        }
+
         // return $this->user->id;
         Session::put('userid',$user->id);
         Session::put('email',$user->email);
@@ -208,9 +314,12 @@ $tmpval = DB::table('cart')
 
 Session::put('cart',$tmpval); 
 
-
+$menuanddrnks = Session::get('cartamnt') + (Session::has('drnkssum')?Session::get('drnkssum'):0) ;
 // die(var_dump($tmpval[0]->totsum));
-return Session::get('cartamnt') . '_' . Session::get('carttot');
+// return Session::get('cartamnt') . '_' . Session::get('carttot');
+Session::put('cartdrnkssum',$menuanddrnks);
+
+return $menuanddrnks . '_' . Session::get('carttot');
     }
 
     /**

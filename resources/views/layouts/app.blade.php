@@ -19,6 +19,76 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
+            var drnksarray=[];
+
+
+
+            $('.drnksleft').click(function(e){
+                // console.log(e.target);
+                e.preventDefault();
+                var qty = parseInt($(this).parent().find("input").val());
+                var id = $(this).parent().find("input").attr("id");                
+                var obj = $(this).parent().find("input");
+
+                if(qty==0)
+                {
+
+                }
+                else{
+
+                    obj.val(qty-1);
+                    drnksarray[id] = qty-1;
+                    console.log(drnksarray);
+                    obj.trigger("change");
+                }
+               
+
+            });
+            $('.drnksryt').click(function(e){
+                e.preventDefault();
+                var qty = parseInt($(this).parent().find("input").val());
+                var obj = $(this).parent().find("input"); 
+                var id = $(this).parent().find("input").attr("id");
+
+                 if(qty==10)
+                {
+
+                }
+                else{
+                obj.val(qty+1);
+                obj.trigger("change");
+                drnksarray[id] = qty+1;
+                console.log(drnksarray);
+                }
+
+            });
+
+
+            $("#savedrinks").click(
+                function(){
+                
+                // alert(drnksarray);
+                    // $.post('/cart',{'drnks' : drnksarray,'_token': $('input[name=_token]').val(),function(data)
+                    // {
+                    //     console.log(data);
+                    // });
+                        
+                    $.post('/cart',{'ite' : drnksarray,'_token': $('input[name=_token]').val()},function(data)
+	{	
+       var cartdata = data.split('_');
+        // $("#cartitems").text(cartdata[1]); 
+         $("#tot_val").text(cartdata[0]);			        
+		console.log(data);
+	});
+                    // for(var ke in drnksarray)
+                    // {
+                    //     console.log(ke);
+                    //     console.log(drnksarray[ke]);
+
+                    // }
+                }
+            );
+
 
             $('.quantity-right-plus').click(function(e)
             {
@@ -103,7 +173,7 @@
 
     var arr= id.split('_');
     var chefid  =  arr[1];
-    var spanele = "#tot_"+chefid;
+    var spanele = "#tot_val";
     // var cartele = "cartitems";
 
 
@@ -217,14 +287,6 @@
     {{csrf_field()}}
 
     @include('layouts.foot')
-    <script src="{{ asset('js/mapscript.js') }}" defer></script>
-
-    {{-- <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_WSJDMq65r3I68pWo_qBhs4kOov7ab4k">
-
-    async defer></script> --}}
-
-
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_WSJDMq65r3I68pWo_qBhs4kOov7ab4k&libraries=places"  async defer></script>
-
+    
 </body>
 </html>

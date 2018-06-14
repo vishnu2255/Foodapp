@@ -18,12 +18,19 @@
 {{-- <hr class="featurette-divider">  --}}
 
 {{-- <h3 style="text-align: center"><em><strong> Please Checkout 1 chef items at a time </strong> </em> </h3> --}}
-<div class="col-md-10 order-md-2 mb-4" style="margin: 20px">
+
+  
+
+<div class="col-md-11 order-md-2 mb-4" style="margin: 20px">
     <h4 class="d-flex justify-content-between align-items-center mb-3" style="text-align: center">
       {{-- <span class="text-muted" >Your cart</span> --}}
       Your Cart
        {{-- <span class="badge badge-secondary badge-pill">3</span> --}}
     </h4>
+
+    <a href="/dishes" class="btn btn-primary pull-right">      
+    Click here to add more dishes 
+    </a>
 <?php $chefcnt=0;?>
     @foreach($chefcarts as $key => $value)
 
@@ -35,25 +42,19 @@
        $totsum = $chefdet[2];
 ?>
 <div class="row" style="margin-top: 20px">
-    <div class="col-md-10 col-sm-10">
+    <div class="col-md-12 col-sm-12">
             <h4 >
                     <a href="/chefs/{{$chefid}}" style="font-family: georgia,serif"> <b> {{$chefname}} </b> </a>    
             </h4>
     </div>
 
-    <div class="col-md-2 col-sm-2">
-       
-    {{-- <button id="{{$chefid}}" class="btn btn-danger btn-lg showdrinks">Would You Like to Add Drinks? </button>     --}}
-        
-
-    </div>
         
 </div>
     
 
     <div class="row">
 
-        <div class="col-md-8">
+        <div class="col-md-7">
 
     <table class="table table-striped" style="margin: 20px">
         <thead>
@@ -71,7 +72,7 @@
             <?php $id++;?>
           <th scope="row">{{$id}}</th>
             <td>
-                <h6 class="my-0" style="font-size: 30px;" > <strong> {{$cartitem->itm_name}} </strong> </h6>
+                <h6 class="my-0" style="font-size: 30px;" > <strong> {{strtoupper($cartitem->itm_name)}} </strong> </h6>
                 <small class="text-muted" style="font-size: 15px;"> {{$cartitem->itm_desc}}</small>
             </td>
             <td>
@@ -84,14 +85,14 @@
 
               <div class="input-group">
                
-                    <button type="button"  class="btn btn-info btn-circle quantity-left-minus  btn-number"  data-type="minus" data-field="">
+                    <button type="button"  class="mr-2 btn btn-primary btn-circle quantity-left-minus  btn-number" style="border-radius: 50%;" data-type="minus" data-field="">
                       {{-- <span class="glyphicon glyphicon-minus"></span> --}}
                       <ion-icon name="remove"></ion-icon>
                     </button>
            
-                <input type="text" style="font-size: 20px;" id="{{$cartitem->menu_item_id.'_'.$cartitem->chef_id}}" class="btnquantitycart" value="{{$cartitem->qty}}"  name="quantity" style="width: 50px; text-align:center"  size="2" maxlength="2">
+                <input type="text" style="font-size: 20px; border: 2px ; text-align: center" id="{{$cartitem->menu_item_id.'_'.$cartitem->chef_id}}" class="btnquantitycart" value="{{$cartitem->qty}}"  name="quantity" style="width: 50px; text-align:center"  size="2" maxlength="2">
             
-                    <button type="button" class="btn btn-info btn-circle quantity-right-plus  btn-number" data-type="plus" data-field="">
+                    <button type="button" class="ml-2 btn btn-primary btn-circle quantity-right-plus  btn-number" style="border-radius: 50%;" data-type="plus" data-field="">
                         {{-- <span class="glyphicon glyphicon-plus"></span> --}}
                         <ion-icon name="add"></ion-icon>
                     </button>
@@ -105,7 +106,7 @@
             <td ><span style="font-size: 30px;">  {{$cartitem->itm_price}} </span>  </td>
 
             <td>
-            <button type="button" id="rem_{{$cartitem->menu_item_id}}" class="btn btn-danger btn-sm removebtn" aria-label="Left Align">
+            <button type="button" style="border-radius: 50%;" id="rem_{{$cartitem->menu_item_id}}" class="btn btn-danger removebtn" aria-label="Left Align">
                 <ion-icon name="close"></ion-icon>
              </button>
             </td>
@@ -122,18 +123,18 @@
     </div>
 
 
-<div class="col-md-4" id="drinks_{{$chefid}}" style="display:none">
+<div class="col-md-4" id="drinks_{{$chefid}}" style="">
         
         <?php 
-        $drsec = $value[0]->drinks;
-        $dr = json_decode($drsec); 
+        // $drsec = $value[0]->drinks;
+        // $dr = json_decode($drsec); 
         $did=0;           
         ?>
 
 <table class="table table-hover" style="margin: 20px">
         <thead>
           <tr class="well-flat">
-            <th scope="col">SNo</th>
+            {{-- <th scope="col">SNo</th> --}}
             <th scope="col">Drink</th>
             <th scope="col">Quantity</th>
             <th scope="col">Price</th>
@@ -141,39 +142,66 @@
         </thead>
         <tbody class="well-flat">
 
-        @foreach($dr as $dname=>$dvalue)
+        @foreach($drinks as $drink)
 <tr>
         <?php  $did++; ?>
-<th scope="row">
+{{-- <th scope="row">
 {{$did}}
-</th>
-<td> {{$dname}} </td>
+</th> --}}
+<td>
+{{-- {{$drink->drnk_name}}  --}}
+<div style="width:50px"> 
+    <img src="../images/drinks/{{$drink->drnk_imagepath}}" alt="" srcset="" width="100%">
+</div>
+</td>
 <td>
 
 
-<input type="number" id="{{$chefid}}" class="form-control drinksquantitycart" name="drnkquantity" min="1" max="10" value="{{$dvalue->qty}}" style="text-align: center;width:70px;">
+{{-- <input type="number" id="{{$chefid}}" class="form-control drinksquantitycart" name="drnkquantity" min="1" max="10" value="1" style="text-align: center;width:70px;"> --}}
+
+<div class="input-group">
+               
+    <button type="button"  class="mr-2 btn btn-primary btn-circle drnksleft" style="border-radius: 50%;" data-type="minus" data-field="">
+      {{-- <span class="glyphicon glyphicon-minus"></span> --}}
+      <ion-icon name="remove"></ion-icon>
+    </button>
+@if(Session::has('drnkssum'))
+  <input type="text" style="font-size: 20px; border: 2px ; text-align: center" id="{{$drink->id}}" class="drnkscart" value="{{$drink->drnkqty==NULL?0:$drink->drnkqty}}"  name="quantity" style="width: 50px; text-align:center"  size="2" maxlength="2">
+@else
+  <input type="text" style="font-size: 20px; border: 2px ; text-align: center" id="{{$drink->id}}" class="drnkscart" value="0"  name="quantity" style="width: 50px; text-align:center"  size="2" maxlength="2">
+@endif
+    <button type="button" class="ml-2 btn btn-primary btn-circle drnksryt" style="border-radius: 50%;" data-type="plus" data-field="">
+        {{-- <span class="glyphicon glyphicon-plus"></span> --}}
+        <ion-icon name="add"></ion-icon>
+    </button>
+
+</div>
 
 </td>
 {{-- <td>  {{$dvalue->qty}}</td> --}}
 
-<td> <span style="font-size: 30px;"> {{$dvalue->price}} </span> </td>
+<td> <span style="font-size: 30px;"> {{$drink->drnk_price}} </span> </td>
 
 </tr>
-        @endforeach
-
+        @endforeach        
         </tbody>
 </table>
 
-    </div>
+<button id="savedrinks" class="ml-3 btn btn-danger savedrinks"> 
+    Save Changes
+</button>
+
+</div>
 </div>
       <div class="row" style="margin: 20px">
-          <div class="col-md-6">
-                <a href="/checkout/{{$chefid}}"  class="btn btn-primary btn-lg" style="float: left; background-color : #479f55" id="checkout_{{$chefid}}" >Proceed to Checkout</a>            
+          <div class="col-md-4">
+                <a href="/checkout/{{$chefid}}"  class="btn btn-danger btn-lg" style="float: left;" id="checkout_{{$chefid}}" >Proceed to Checkout</a>            
           </div>
     
           
-          <div class="col-md-4" style="float:right; color: yellow">
-               <span  style="font-size: 30px;" class="well-flat"><strong> Total:  </strong> </span> <span class="" style="font-size: 30px;"> $ </span> <span style="font-size: 30px;" id="tot_{{$chefid}}"> {{$totsum}}</span>   
+          <div class="col-md-2" style="float:right; color:red ">
+              <strong>  <span style="font-size: 30px;" class="well-flat"><strong> Total:  </strong> </span> <span class="well-flat" style="font-size: 30px;"> $</span> <span style="font-size: 30px;" id="tot_val"> {{$totsum}}  </span>   
+              </strong>
           </div>
 
 
@@ -185,5 +213,7 @@
     @endforeach
 
   </div>
+
+
 
   @endsection

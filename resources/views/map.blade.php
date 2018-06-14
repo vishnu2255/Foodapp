@@ -1,21 +1,24 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app') --}}
 
-@section('content')
+{{-- @section('content') --}}
 
 {{-- <div id="map" class="container" style="height: 500px;width:600px">
 Map
 </div> --}}
 {{csrf_field()}}
-<div id="map-canvas" style="height: 500px;width:600px" >
+<div id="map-canvas" style="width:600px;height: 500px;" >
 
 </div>
+
+<script src="{{ asset('js/mapscript.js') }}" defer></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_WSJDMq65r3I68pWo_qBhs4kOov7ab4k&libraries=places"  async defer></script>
 
 {{-- 
 <button id="get"> 
     directions
 </button> --}}
 
-@endsection
+{{-- @endsection --}}
 
 {{-- <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">

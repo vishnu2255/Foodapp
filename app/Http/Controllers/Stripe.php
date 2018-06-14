@@ -50,7 +50,7 @@ return redirect('/dishes');
             'email' => Session::get('email'),
             'source' => $token,
         ));
-        $am = (float)Session::get('totsum');
+        $am = (float)Session::get('cartdrnkssum');
         $am =$am*100;
 
         $charge = \Stripe\Charge::create([
@@ -62,6 +62,8 @@ return redirect('/dishes');
             ]);
 
             $cart = serialize(Session::get('cart'));
+            $drinks = serialize(Session::get('drinks'));
+
         DB::table('orders')
         ->insert(
             [  'chef_id' => Session::get('chefid'),
@@ -69,8 +71,10 @@ return redirect('/dishes');
                'menu_item_id' => 1,
                'payment_id' => $charge->id,
                'cart'  => $cart, 
-               'totalamnt' => Session::get('totsum') ,
+               'drnkscart' => $drinks,
+               'totalamnt' => Session::get('cartdrnkssum') ,
                'isActive'  => 'yes'
+
             ]
         );
 
@@ -79,10 +83,20 @@ return redirect('/dishes');
         ->where('isActive','=','yes')
         ->update(['isActive' => 'no']);
 
+        DB::table('drinkscart')
+        ->where('user_id','=',Session::get('userid'))
+        ->where('isActive','=','yes')
+        ->update(['isActive' => 'no']);
+
         Session::forget('cartamnt');
         Session::forget('totsum');
         Session::forget('cart');
         Session::forget('carttot');
+        Session::forget('cartdrnkssum');
+        Session::forget('drnkssum');
+        Session::forget('drinks');
+        
+        
         // Session::forget('chefid');
 
         // return redirect()->action('OrderController@Index',['status','success']);

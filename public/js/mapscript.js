@@ -44,7 +44,7 @@ route();
 
     function b(){
 
-        alert(fail);
+        alert("User denied access");
     }
  }
   
@@ -57,7 +57,7 @@ route();
         to = new google.maps.LatLng(tolat, tolon);
 
         var options = {
-            zoom:12,
+            zoom:8,
             center: frm
         }
 

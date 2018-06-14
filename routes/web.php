@@ -13,19 +13,19 @@
 
 Route::get('/', function () {
    // return view('chefs/menuscar2');
-   return view('map');
-  $config = array();
-  $config['center'] = "Yorkdale Mall" ;
-  $config['zoom']  = '14';
-  $config['map_height'] = '500px';
+  //  return view('map');
+  // $config = array();
+  // $config['center'] = "Yorkdale Mall" ;
+  // $config['zoom']  = '14';
+  // $config['map_height'] = '500px';
 
-  GMaps::initialize($config);
   // GMaps::initialize($config);
+  // // GMaps::initialize($config);
 
-  $map = GMaps::create_map();
+  // $map = GMaps::create_map();
 
-  return view('map')->with('map',$map);
-    //  return view('welcome');
+  // return view('map')->with('map',$map);
+     return view('welcome');
    // return view('chefs/profile');
 });
 

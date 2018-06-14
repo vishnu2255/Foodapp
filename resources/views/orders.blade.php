@@ -10,23 +10,28 @@
     </div>
 @endif
 
+<h2>My Current Orders </h2>
+<div class="row">
 
-@if($curentorder->count()>0)
+    <div class="col-md-6">
+            @if($curentorder->count()>0)
 
-
+            @foreach($curentorder as $order)
+            
+            <h3>OrderNum #{{$order->id}}</h3>
 <div class="container">
+        
 
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-2">
 
-            <h2>My Current Order </h2>
-
+           
             <div class="panel panel-default">
                 <div class="panel-body">
 
                     <ul class="list-group">
 
-<?php $itms = unserialize($curentorder[0]->cart) ; $itmid=0; ?>
+<?php $itms = unserialize($order->cart) ; $itmid=0; ?>
 @foreach($itms as $itm)
 
 <li class="list-group-item">
@@ -42,7 +47,7 @@
             <span class="ml-10"> Units {{$itm->qty}} </span>
     </div>
     <div class="col-sm-3">
-            Price <span class="badge">  ${{$itm->itm_price}} </span>
+        <strong>  Price <span class="">  ${{$itm->itm_price}} </span> </strong>
     </div>
     
 </div>
@@ -50,11 +55,42 @@
 </li>
 
 @endforeach
+
+<?php $drinks = unserialize($order->drnkscart) ; $itmid=0; ?>
+
+
+@if($drinks->count()>0)
+<h3 class="mb-3 mt-3">Drinks</h3>
+@foreach($drinks as $drink)
+
+<li class="list-group-item">
+<?php $itmid++; ?>
+<div class="row">
+    <div class="col-sm-3">
+            <span>Item No. {{$itmid}}</span>
+    </div>
+    <div class="col-sm-3">
+            <span class="ml-10"> {{$drink->drnk_name}} </span>
+    </div>
+    <div class="col-sm-3">
+            <span class="ml-10"> Units {{$drink->drnkqty}} </span>
+    </div>
+    <div class="col-sm-3">
+          <strong> Price <span class="ml-10">  ${{$drink->drnk_price}} </span> </strong>
+    </div>
+    
+</div>
+
+</li>
+
+@endforeach
+@endif
+
                     </ul>
 
                 </div>
                 <div class="panel-default mt-5 pull-right">
-                    <strong>Total Price : {{$curentorder[0]->totalamnt}}</strong>
+                    <strong>Total Price : {{$order->totalamnt}}</strong>
                 </div>    
             </div>
 
@@ -63,11 +99,20 @@
 
 
 </div>
-@endif
+
+<hr>
+@endforeach
+
+@endif 
+
+
+
+{{-- old orders --}}
+
 @if($oldorders->count()>0)
 <div class="container" style="margin-top: 50px; margin-bottom: 25px" >
 <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-2">
 
             <h2 class="mb-50" style="margin-bottom: 50px">My Previous Orders </h2>
 
@@ -99,4 +144,16 @@
 
 </div>
 @endif
+
+</div>
+
+<div class="col-md-6" style="float: right;">
+
+    @include('map')
+</div>
+
+</div>
+
+
+
 @endsection

@@ -155,7 +155,10 @@ return redirect()->route('/dishes');
         //  die(var_dump($tmpval));
     //   $tmpsum = $sum[0]->totsum;
     
-      $tmpsum = Session::get('cartamnt');
+    //   $tmpsum = Session::get('cartamnt');
+
+      $tmpsum = Session::get('cartdrnkssum');
+      
       $hst = round($tmpsum*0.13,2) ;
       
       $totsum =   $tmpsum + $hst ;

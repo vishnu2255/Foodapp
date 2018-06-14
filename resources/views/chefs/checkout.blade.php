@@ -20,7 +20,19 @@
 <div class="container">
 
   {{-- <form action="/payment/{{$tmparr[4]}}" method="post"> --}}
-      <h4>{{$tmparr[0]}} </h4>
+      
+    <div class="row mb-3">
+
+      <div class="col-md-4">
+          <h4>{{$tmparr[0]}} </h4>
+      </div>
+      
+      <div class="col-md-8">
+          <a href="/dishes" class="btn btn-primary pull-right" style="float: right">      
+            Click here to add more dishes 
+          </a>
+      </div>      
+    </div>
 <div class="row">
 
 <div class="col-md-6" >

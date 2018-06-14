@@ -26,7 +26,7 @@ class OrderController extends Controller
 
         $curentorder = DB::table('orders')
                          ->join('chef_users','orders.chef_id','=','chef_users.id')
-                         ->select('chef_users.name','orders.id','orders.totalamnt','orders.created_date','orders.cart')   
+                         ->select('chef_users.name','orders.id','orders.totalamnt','orders.drnkscart','orders.created_date','orders.cart')   
                          ->where('orders.customer_id',$user->id)
                          ->where('orders.isActive','yes')
                          ->get();
@@ -38,7 +38,7 @@ class OrderController extends Controller
                          ->where('orders.isActive','no')
                          ->get();
 
-                //   var_dump(unserialize($order[0]->cart));
+                //   die(var_dump($curentorder[0]));
 
 
                         //  $curentorder = $order[0];

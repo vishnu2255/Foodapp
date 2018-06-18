@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -9,11 +10,12 @@
     <h3>Order placed</h3>
     </div>
 @endif
+<div class="container">
 
 <h2>My Current Orders </h2>
 <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-8">
             @if($curentorder->count()>0)
 
             @foreach($curentorder as $order)
@@ -59,7 +61,7 @@
 <?php $drinks = unserialize($order->drnkscart) ; $itmid=0; ?>
 
 
-@if($drinks->count()>0)
+@if($drinks!=null && $drinks->count()>0)
 <h3 class="mb-3 mt-3">Drinks</h3>
 @foreach($drinks as $drink)
 
@@ -127,7 +129,7 @@
 <ul class="list-group">
          <li class="list-group-item">
          <span>OrderNum  #{{$ord->id}}</span>
-         <span class="ml-5">{{date($ord->created_date)}}</span>
+         <span class="ml-5">{{date($ord->created_at)}}</span>
          <span class="pull-right"> <strong>Total Price : {{$ord->totalamnt}}</strong> </span>
          
          </li>
@@ -147,13 +149,24 @@
 
 </div>
 
-<div class="col-md-6" style="float: right;">
+<div class="col-md-4" style="float: right;">
 
-    @include('map')
+        {{-- @include('map2') --}}
+
+<a class="btn btn-primary btn-lg" href="/mapslocation">
+Click here to find the route    
+</a>        
+<div style="width: 400px">
+    <a href="/mapslocation">
+        <img src="../images/maps.jpg" alt="" width="100%"></a>
+</div>
+        
 </div>
 
 </div>
 
 
-
+</div>
 @endsection
+
+{{-- @include('map2') --}}

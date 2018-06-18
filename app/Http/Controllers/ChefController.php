@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\chef_users;
 use App\menu_items;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ChefController extends Controller
 {
@@ -22,8 +24,23 @@ class ChefController extends Controller
      */
     public function index()
     {
-    //    $lists = chef_users::all();
+       //$lists = chef_users::all();
        //var_dump($lists);
+
+       $user = Auth::user();            
+       // dd(Session::get('cartamnt'));
+       $carttot = DB::table('cart')      
+       ->select(DB::raw('SUM(cart.qty) as totcnt'))                       
+       ->where('cart.customer_id',$user->id)       
+       ->where('cart.isActive','=','yes')                    
+       ->get();              
+       if($carttot->count()>0)
+       {
+        $cnt = $carttot[0]->totcnt;
+
+        Session::put('carttot',$cnt);
+
+       }
 
        $temps = array();
        $chefs = DB::table('chef_users')->get();

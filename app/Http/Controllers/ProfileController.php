@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 use App\chefs;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        // dd(Session::all());
+        $this->middleware('auth');
+    }
 
     public function show($id)
 {

@@ -1,0 +1,25 @@
+{
+	//Users will listen on this path ( image_cache/user_id ) for images to be updated
+	"image_cache" : {
+
+		//This array will contain all images that have been updated
+		"user_id" : [
+
+			"id" : "image_path",
+		]
+	},
+
+	//Users will listen on this path for order updates ( order/user_id )
+	"orders" : [
+
+		"user_id" : [
+
+			"order_id" : {
+
+				"chef_id" : 1,
+				"customer_id" : 2,
+				"state" : "pending"
+			},
+		],
+	]
+}

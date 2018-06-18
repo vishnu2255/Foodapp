@@ -50,11 +50,13 @@ return redirect('/dishes');
             'email' => Session::get('email'),
             'source' => $token,
         ));
-        $am = (float)Session::get('cartdrnkssum');
-        $am =$am*100;
+        $am = (float)(Session::get('totsum')+(Session::has('tip')?Session::get('tip'):0));
+        // $am = (float)Session::get('totsum');
+        $am = round($am,2);
+        $amnt =$am*100;
 
         $charge = \Stripe\Charge::create([
-            'amount' => $am,
+            'amount' => $amnt,
             'currency' => 'cad',
             'description' => 'Example charge',
             // 'source' => $token,
@@ -72,7 +74,7 @@ return redirect('/dishes');
                'payment_id' => $charge->id,
                'cart'  => $cart, 
                'drnkscart' => $drinks,
-               'totalamnt' => Session::get('cartdrnkssum') ,
+               'totalamnt' => $am,
                'isActive'  => 'yes'
 
             ]
@@ -83,10 +85,12 @@ return redirect('/dishes');
         ->where('isActive','=','yes')
         ->update(['isActive' => 'no']);
 
-        DB::table('drinkscart')
-        ->where('user_id','=',Session::get('userid'))
-        ->where('isActive','=','yes')
-        ->update(['isActive' => 'no']);
+        // DB::table('drinkscart')
+        // ->where('user_id','=',Session::get('userid'))
+        // ->where('isActive','=','yes')
+        // ->update(['isActive' => 'no']);
+
+        DB::table('drinkscart')->where('user_id','=',Session::get('userid'))->delete();
 
         Session::forget('cartamnt');
         Session::forget('totsum');
@@ -95,6 +99,7 @@ return redirect('/dishes');
         Session::forget('cartdrnkssum');
         Session::forget('drnkssum');
         Session::forget('drinks');
+        Session::forget('tip');        
         
         
         // Session::forget('chefid');
@@ -111,8 +116,10 @@ return redirect('/dishes');
 //  dd(Session::all());
     }
 
-    public function pay()
+    public function pay(Request $request)
     {
+        // dd($request->all());
+
         if(!Session::has('cart'))
         {
             return redirect('/dishes');
@@ -122,5 +129,11 @@ return redirect('/dishes');
         return view('stripe');
     }
 
- 
+    
+
+    public function paytip(Request $request)
+    {   
+        return 123;
+
+    }
 }

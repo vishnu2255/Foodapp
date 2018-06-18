@@ -1,6 +1,5 @@
-{{-- @extends('layouts.app') --}}
-
-{{-- @section('content') --}}
+@extends('layouts.app') 
+{{-- @section('content')
 
 {{-- <div id="map" class="container" style="height: 500px;width:600px">
 Map

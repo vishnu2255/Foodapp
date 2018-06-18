@@ -72,7 +72,7 @@
             <?php $id++;?>
           <th scope="row">{{$id}}</th>
             <td>
-                <h6 class="my-0" style="font-size: 30px;" > <strong> {{strtoupper($cartitem->itm_name)}} </strong> </h6>
+                <h6 class="my-0" style="font-size: 25px;" > <strong> {{strtoupper($cartitem->itm_name)}} </strong> </h6>
                 <small class="text-muted" style="font-size: 15px;"> {{$cartitem->itm_desc}}</small>
             </td>
             <td>
@@ -103,7 +103,7 @@
               {{-- </button> --}}
               {{-- {{$cartitem->qty}} --}}
             </td>
-            <td ><span style="font-size: 30px;">  {{$cartitem->itm_price}} </span>  </td>
+            <td> <strong><span style="font-size: 30px;">  {{$cartitem->itm_price}} </span> </strong> </td>
 
             <td>
             <button type="button" style="border-radius: 50%;" id="rem_{{$cartitem->menu_item_id}}" class="btn btn-danger removebtn" aria-label="Left Align">
@@ -180,7 +180,7 @@
 </td>
 {{-- <td>  {{$dvalue->qty}}</td> --}}
 
-<td> <span style="font-size: 30px;"> {{$drink->drnk_price}} </span> </td>
+<td>  <strong><span style="font-size: 30px;"> {{$drink->drnk_price}} </span> </strong> </td>
 
 </tr>
         @endforeach        
@@ -188,7 +188,7 @@
 </table>
 
 <button id="savedrinks" class="ml-3 btn btn-danger savedrinks"> 
-    Save Changes
+    Add To Cart
 </button>
 
 </div>

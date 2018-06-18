@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
-class OrderController extends Controller
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
+
+class TipController extends Controller
 {
-    public function __construct()
-    {
-        // dd(Session::all());
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -21,32 +17,6 @@ class OrderController extends Controller
     public function index()
     {
         //
-        $user = Auth::user();      
-        // var_dump($user->id);
-
-        $curentorder = DB::table('orders')
-                         ->join('chef_users','orders.chef_id','=','chef_users.id')
-                         ->select('chef_users.name','orders.id','orders.totalamnt','orders.drnkscart','orders.created_at','orders.cart')   
-                         ->where('orders.customer_id',$user->id)
-                         ->where('orders.isActive','yes')
-                         ->latest()
-                         ->get();
-
-                         $oldorders = DB::table('orders')
-                         ->join('chef_users','orders.chef_id','=','chef_users.id')
-                         ->select('chef_users.name','orders.id','orders.totalamnt','orders.created_at')   
-                         ->where('orders.customer_id',$user->id)
-                         ->where('orders.isActive','no')
-                         ->latest()
-                         ->get();
-
-                //   die(var_dump($curentorder[0]));
-
-
-                        //  $curentorder = $order[0];
-        return view('orders')->with('curentorder',$curentorder)->with('oldorders',$oldorders);
-
-        // var_dump($curentorder[0]->totalamnt);
     }
 
     /**
@@ -67,9 +37,24 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd(123);
+        if(!Session::has('cart'))
+        {
+            return redirect('/dishes');
 
-        var_dump(1);
+        }        
+        if($request['tip']!=null)
+        {
+            Session::put('tip', floatval($request['tip']) );
+            // $tmp =  Session::get('totsum') + floatval($request['tip']);
+            // Session::put('totsum',$tmp);           
+
+        }
+        return view('stripe');
+
+
+        // dd($request->all());
+
     }
 
     /**

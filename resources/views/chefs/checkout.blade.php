@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<form method="POST" action="/pay2">
 <div class="row">
     <div class="col-md-9"> 
       
@@ -42,21 +42,21 @@
         <li class="list-group-item" style="background-color: orange">Order Details</li>
         <li class="list-group-item">
           <span style="font-family: georgia,serif" class="">Food & Bevarage Subtotal </span>
-          <span  name="sumamnt" style="float: right" style="font-family: georgia,serif" > ${{$tmparr[1]}} </span>
+         <strong> <span  name="sumamnt" style="float: right" style="font-family: georgia,serif" > ${{$tmparr[1]}} </span> </strong>
         </li>
         <li class="list-group-item">
             <span style="font-family: georgia,serif" class="">HST </span>
-            <span name="hst" style="float: right"> ${{$tmparr[2]}} </span>
+            <strong> <span name="hst" style="float: right"> ${{$tmparr[2]}} </span> </strong>
         </li>
         <li class="list-group-item"><span style="font-family: georgia,serif"> <b>Total</b> </span>
-          <span name="totsum" style="float: right"> ${{$tmparr[3]}} </span></li>
+          <strong> <span name="totsum" style="float: right"> ${{$tmparr[3]}} </span></li> </strong>
       </ul>
 
       <hr class="featurette-divider"> 
 
       <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01" style="background-color: burlywood">Payment Method</label>
+            <label class="input-group-text" for="inputGroupSelect01" style="background-color: salmon">Payment Method</label>
           </div>
           <select class="custom-select" name="payment_option" id="inputGroupSelect01">
             
@@ -66,14 +66,20 @@
 
           </select>
       </div>
-    <a href="/pay">
-    <button style="width: 300px" class="btn btn-success btn-lg">
+      
+      <div class="input-group mb-3" style="width:150px;">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">$</label>
+          </div>
+          <input class="form-control" onkeypress="validate(event)" style="width:30px;" id="tipamnt" name="tip" type="text" placeholder="Tip?" maxlength="4" > 
+      </div>
+  
+     
+    {{-- <a href="/pay2"> --}}
+    <button type="submit" style="width: 300px" class="btn btn-success btn-lg">
         Pay Now
     </button>        
-    </a>
-  
-
-
+    {{-- </a> --}}
       
       <div style="display: none" >
          
@@ -163,7 +169,7 @@
 
             <li class="list-group-item">
                 <span class=" ">{{$item->itm_name}}</span>
-                <span style="float: right">${{$item->itm_price}} </span>
+             <strong><span style="float: right">${{$item->itm_price}} </span></strong>
             </li>
 
             @endforeach
@@ -177,6 +183,19 @@
 {{-- </form>   --}}
 
 </div>
-
-
+{{csrf_field()}}
+</form>
 @endsection
+
+<script>
+ function validate(evt) {
+                    var theEvent = evt || window.event;
+                    var key = theEvent.keyCode || theEvent.which;
+                    key = String.fromCharCode( key );
+                    var regex = /[0-9]|\./;
+                    if( !regex.test(key) ) {
+                      theEvent.returnValue = false;
+                      if(theEvent.preventDefault) theEvent.preventDefault();
+                    }
+                  }
+  </script>

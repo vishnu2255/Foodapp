@@ -27,8 +27,13 @@ class CartController extends Controller
     public function index()
     {
         $user = Auth::user();            
+// dd(Session::get('cartamnt'));
+$crtdel =   DB::table('cart')
+->where('customer_id','=',$user->id)
+->where('isActive','=','yes')
+->get();
 
-        if(!Session::has('cartamnt'))
+        if(!$crtdel->count()>0)
         {
             // return redirect()->back();
             return redirect('/dishes');
@@ -51,10 +56,16 @@ class CartController extends Controller
        {
         //    var_dump($chef->chef_id);
         $tmpid = $chef->chef_id;
-        $chef_det = DB::table('chef_users')->select('name')->where('id',$chef->chef_id)->first();
+        $chef_det = DB::table('chef_users')->where('id',$chef->chef_id)->first();
 
         // var_dump($chef_det->name);
         $tmpname = $chef_det->name;
+
+        $chefaddress = $chef_det->home_address.' '.$chef_det->city.' '.$chef_det->province_state;
+// dd($chefaddress);
+        Session::put('chefaddress',$chefaddress);
+
+        // dd($chefaddress);
         Session::put('chefname',$tmpname);
         Session::put('chefid',$tmpid);
 
@@ -103,21 +114,35 @@ $d = DB::table('drinkscart')
     ->where('user_id',$user->id)
     ->where('isActive','=','yes')
     ->get();
+//die(var_dump($d));
 
         if($d->count()>0)
         {
-            $tmpsum = $tmpsum + Session::get('drnkssum');
-       $drinks =  DB::table('drinks')
+            // $tmpsum = $tmpsum + Session::get('drnkssum');
+            $drinks =  DB::table('drinks')
             ->leftjoin('drinkscart','drinks.id','=','drinkscart.drinkid')
-            ->where('drinks.chef_id','=',$user->id)
+            ->where('drinks.chef_id','=',$tmpid)
+            // ->where('drinkscart.isActive','=','yes') 
+            // ->where('drinkscart.user_id',$user->id)         
             ->get();
-      // die(var_dump($tmpdb));
+
+            $sumd = DB::table('drinkscart')
+            ->select(DB::raw('SUM(drnkscost) as totsum')) 
+    ->where('user_id',$user->id)
+    ->where('isActive','=','yes')
+    ->get();
+
+    Session::put('drnkssum',$sumd[0]->totsum);
+    $tmpsum = $tmpsum +  Session::get('drnkssum');
+
+    //   die(var_dump($drinks));
 
 
         }
 
         else
         {
+            Session::forget('drnkssum');
                   $drinks = DB::table('drinks')
                                   ->where('chef_id',$tmpid)
                                     ->get();
@@ -139,6 +164,7 @@ $tmpkey = $tmpid . '_' . $tmpname.'_'.$tmpsum;
 // var_dump($drinks);
 // echo"</pre>";
 
+// die(var_dump($drinks));
         return view('chefs.cart')->with('chefcarts',$finalarray)->with('drinks',$drinks);
 
 
@@ -223,9 +249,17 @@ $tmpkey = $tmpid . '_' . $tmpname.'_'.$tmpsum;
              }
            }
 
-           Session::put('drnkssum',$tmp);
-           Session::put('cartdrnkssum',Session::get('cartamnt')+$tmp);
-        return Session::get('cartamnt')+$tmp;
+           DB::table('drinkscart')->where('drnkqty','=',0)->delete();
+           //return $id;
+
+           $sumd = DB::table('drinkscart')
+           ->select(DB::raw('SUM(drnkscost) as totsum')) 
+   ->where('user_id',$user->id)
+   ->where('isActive','=','yes')
+   ->get();
+           Session::put('drnkssum',$sumd[0]->totsum);
+           Session::put('cartdrnkssum',Session::get('cartamnt')+ Session::get('drnkssum'));
+        return Session::get('cartamnt')+ Session::get('drnkssum');
 
         }
         else{
@@ -365,7 +399,26 @@ return $menuanddrnks . '_' . Session::get('carttot');
     public function destroy($id)
     {        
         // return $id;
-        DB::table('cart')->where('menu_item_id','=',$id)->delete();
+        $user = Auth::user(); 
+        DB::table('cart')->where('menu_item_id','=',$id)
+                          ->where('customer_id','=',$user->id)
+                          ->where('isActive','=','yes')
+                          ->delete();
+
+        $crtdel =   DB::table('cart')
+        ->where('customer_id','=',$user->id)
+        ->where('isActive','=','yes')
+        ->get();
+        // return ($crtdel->count());
+        if($crtdel->count()>0)
+        {
+
+        }
+        else
+        {
+            Session::forget('cartamnt');
+        }
+
         return $id;
  
 

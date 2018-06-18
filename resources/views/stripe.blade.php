@@ -2,6 +2,11 @@
 
 @section('content')
 
+
+
+{{-- <script src="https://js.stripe.com/v3/"></script> --}}
+
+
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
     Stripe.setPublishableKey('pk_test_38bijvWZk6dGkZe9s47jqepM');
@@ -47,7 +52,6 @@ function stripeResponseHandler(status, response) {
 </script>
 
 
-{{-- <script src="https://js.stripe.com/v3/"></script> --}}
 <div class="container">
 
     <div class="row">
@@ -122,7 +126,7 @@ function stripeResponseHandler(status, response) {
                 <div class='col-md-12'>
                   <div class='form-control total btn btn-info'>
                     Total:
-                  <span class='amount'>{{Session::get('totsum')}}</span>
+                  <span class='amount'>{{Session::get('totsum')+(Session::has('tip')?Session::get('tip'):0) }}</span>
                   </div>
                 </div>
         </div>
@@ -132,7 +136,10 @@ function stripeResponseHandler(status, response) {
                         <button type="submit" class="form-control btn btn-success" value="Submit Payment">Pay »</button>
                 </div>
          </div>
-
+         
+         <div style="height:250px">
+               
+        </div>
         
     </form>
     </div>
@@ -142,3 +149,4 @@ function stripeResponseHandler(status, response) {
     </div>
 
 @endsection
+

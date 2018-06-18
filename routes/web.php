@@ -11,6 +11,11 @@
 |
 */
 
+
+Route::get('/maps', 'AdminController@store');
+
+Route::get('/adminlist', 'AdminController@index');
+
 Route::get('/', function () {
    // return view('chefs/menuscar2');
   //  return view('map');
@@ -26,8 +31,18 @@ Route::get('/', function () {
 
   // return view('map')->with('map',$map);
      return view('welcome');
+    //  return view('fireba1');
+    //  return view('map2');
    // return view('chefs/profile');
 });
+
+
+Route::get('/mapslocation', function () {
+  
+    return view('map2');
+  
+});
+
 
 Route::post('/maps', 'AdminController@store');
 
@@ -37,6 +52,8 @@ Route::post('/pay','Stripe@stripepay');
 
 Route::post('/store','Stripe@store');
 Route::get('/pay','Stripe@pay');
+
+Route::post('/pay2','TipController@store');
 
 Route::get('/payment/{id}', 'PaymentController@index');
 

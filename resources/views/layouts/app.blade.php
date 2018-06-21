@@ -17,8 +17,25 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="{{ asset('js/customscript.js') }}" defer></script>
+    <script src="{{ asset('js/customscript.js') }}" defer></script>   
+    <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+    <script>
 
+        $("#test").change(function()
+    {
+        alert(12);
+    });
+     $(".searchd").change(function(e)
+                        {
+                            console.log(123);
+                            alert(12);
+                            // e.preventDefault();
+                            // val = $(".searchdish").val();
+                            // alert(val);
+                            // $(".searchdish").text(val);
+                        });
+    
+    </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -31,7 +48,7 @@
 <body>
     <div id="app">
         @include('layouts.navbar')
-        <main class="py-4">
+        <main class="py-0">
             @yield('content')
         </main>
     </div>

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\cart;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderConfirmMail;
 
 
 class Stripe extends Controller
@@ -36,6 +40,7 @@ dd($request->all());
     {
 // dd($request->all());
 
+
 if(!Session::has('cart'))
 {
 return redirect('/dishes');
@@ -47,7 +52,7 @@ return redirect('/dishes');
     try{
 
         $customer = \Stripe\Customer::Create(array(
-            'email' => Session::get('email'),
+            'email' =>  Session::get('emailid'),
             'source' => $token,
         ));
         $am = (float)(Session::get('totsum')+(Session::has('tip')?Session::get('tip'):0));
@@ -69,7 +74,7 @@ return redirect('/dishes');
         DB::table('orders')
         ->insert(
             [  'chef_id' => Session::get('chefid'),
-               'customer_id' => Session::get('userid'),
+               'customer_id' =>  Session::get('userid'),
                'menu_item_id' => 1,
                'payment_id' => $charge->id,
                'cart'  => $cart, 
@@ -101,6 +106,8 @@ return redirect('/dishes');
         Session::forget('drinks');
         Session::forget('tip');        
         
+        // Mail::to(Session::get('emailid'))->send(new WelcomeAgain());
+        Mail::to(Auth::user()->email)->send(new OrderConfirmMail());
         
         // Session::forget('chefid');
 

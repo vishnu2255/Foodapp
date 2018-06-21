@@ -8,11 +8,13 @@
     <div class="alert alert-success">
         {{ session('status') }}
     <h3>Order placed</h3>
+   
     </div>
 @endif
 <div class="container">
 
 <h2>My Current Orders </h2>
+{{-- <span>Status </span><span id="statusorder">Pending</span>  --}}
 <div class="row">
 
     <div class="col-md-8">
@@ -20,7 +22,9 @@
 
             @foreach($curentorder as $order)
             
-            <h3>OrderNum #{{$order->id}}</h3>
+     <span> <h3>OrderNum #{{$order->id}}</h3> 
+     <span style="">Status <span id="statusorder{{$order->id}}">Pending</span> </strong>
+     </span>
 <div class="container">
         
 
@@ -167,6 +171,54 @@ Click here to find the route
 
 
 </div>
+
+<script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<!-- Fonts -->
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+<!-- Styles -->
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script>
+// Initialize Firebase
+var config = {
+apiKey: "AIzaSyDlvh5ZOItKn1VTpdTWmndVObMtyi8WyS8",
+authDomain: "ihearttakeout-578aa.firebaseapp.com",
+databaseURL: "https://ihearttakeout-578aa.firebaseio.com",
+projectId: "ihearttakeout-578aa",
+storageBucket: "ihearttakeout-578aa.appspot.com",
+messagingSenderId: "1026709201120"
+};
+firebase.initializeApp(config);
+</script>
+
+<script>
+// $("#statusorder").text(123);
+function writeUserData(userId, orid, chid , sta) {
+firebase.database().ref('orders/' + orid).set({
+userid: userId,
+chefid: chid,
+status: sta
+});
+}
+var sts = firebase.database().ref('/orders/1');
+
+sts.on('value',function(snapshot){
+  console.log(snapshot.val());
+  status = snapshot.val()['status'];
+  $("#statusorder").text(status);
+});
+
+</script>
+
+
+
 @endsection
 
 {{-- @include('map2') --}}

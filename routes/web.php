@@ -60,6 +60,9 @@ Route::get('/payment/{id}', 'PaymentController@index');
 Route::post('/payment','Stripe@check');
 
 Route::get('/dishes', 'ChefController@index');
+
+Route::post('/dishes', 'ChefController@store');
+
 Route::get('/chefs/{id}', 'ChefController@show');
 
 Route::post('/cart', 'CartController@store');

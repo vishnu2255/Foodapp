@@ -5,64 +5,65 @@
 <main role="main">
 {{-- <div class="container"> --}}
 
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="20000">
+                {{-- <ol class="carousel-indicators">
                   <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                   <li data-target="#myCarousel" data-slide-to="1"></li>
                   <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
+                </ol> --}}
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img class="first-slide" src="../images/Food_6.jpg" alt="First slide" style="width:100%">
                     <div class="container">
                       <div class="carousel-caption">
-                            <form class="form-inline" style="padding-left:30%; padding-bottom:20%">                                  
+                            <form class="form-inline" method="POST" action="/dishes" style="padding-left:25%; padding-bottom:20%">                                  
+                              @csrf
                                     <div class="form-group">
-                                      <label for="inputPassword2" class="sr-only input-lg"></label>
-                                      <input type="text" style=" width:400px"  class="form-control" id="inputPassword2" placeholder="Enter you location">
+                                        <input type="text" name="searchcity" style="width:200px;margin-right: 5px;border: solid" class="searchc form-control" placeholder="City">                                    
+                                        <input type="text" name="searchdish" style="width:200px;margin-right: 5px;border: solid" class="searchd form-control" placeholder="Dish">
                                     </div>
-                                    <a href="/dishes/" class="btn btn-primary">View Dishes</a>
+                                    <button type="submit" class="btn btn-danger btn-lg">Find Chefs</button>
                             </form>
                       </div>
                     </div>
                   </div>
-                  <div class="carousel-item">
+                  {{-- <div class="carousel-item">
                     <img class="second-slide" src="../images/Food_6.jpg" alt="Second slide" style="width:100%">
                     <div class="container">
                       <div class="carousel-caption">
-                            <form class="form-inline" style="padding-left:30%;padding-bottom:20%">                                  
-                                    <div class="form-group">
-                                      <label for="inputPassword2" class="sr-only input-lg"></label>
-                                      <input type="text" style=" width:400px"  class="form-control" id="inputPassword2" placeholder="Enter you location">
-                                    </div>
-                                    <a href="/dishes/" class="btn btn-primary">View Dishes</a>
-                            </form>
+                          <form class="form-inline" method="POST" action="/dishes" style="padding-left:30%; padding-bottom:20%">                                  
+                            @csrf
+                            <div class="form-group">                                    
+                              <input type="text" style=" width:400px" name="searchdish" id="test" class="searchd form-control" placeholder="Search Your Dish">
+                            </div>
+                            <button type="submit" class="btn btn-primary">View Dishes</button>
+                          </form>
                       </div>
                     </div>
-                  </div>
-                  <div class="carousel-item">
+                  </div> --}}
+                  {{-- <div class="carousel-item">
                     <img class="third-slide" src="../images/Food_6.jpg" alt="Third slide" style="width:100%">
                     <div class="container">
                       <div class="carousel-caption">
-                            <form class="form-inline" style="padding-left:30%;padding-bottom:20%">                                  
-                                    <div class="form-group">
-                                      <label for="inputPassword2" class="sr-only input-lg"></label>
-                                      <input type="text" style=" width:400px"  class="form-control" id="inputPassword2" placeholder="Enter you location">
-                                    </div>
-                                    <a href="/dishes/" class="btn btn-primary">View Dishes</a>
-                            </form>
+                          <form class="form-inline" method="POST" action="/dishes" style="padding-left:30%; padding-bottom:20%">                                  
+                            @csrf
+                            <div class="form-group">                                    
+                            <input type="text" style=" width:400px" name="searchdish" class="searchd form-control" placeholder="Search Your Dish">
+                            </div>
+                            <button type="submit" class="btn btn-primary">View Dishes</button>
+                          </form>
                       </div>
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
-                <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                {{-- <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="sr-only">Previous</span>
                 </a>
                 <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="sr-only">Next</span>
-                </a>
+                </a> --}}
               </div>
             {{-- </div> --}}
 <div class="container marketing">
@@ -127,4 +128,6 @@
 </main>
 @endsection
 
-
+<script>
+  
+</script>

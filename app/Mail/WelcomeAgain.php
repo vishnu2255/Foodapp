@@ -6,7 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\User;
+use Illuminate\Support\Facades\Auth;
+
+
 class WelcomeAgain extends Mailable
 {
     use Queueable, SerializesModels;
@@ -18,7 +20,7 @@ class WelcomeAgain extends Mailable
      */
     public function __construct()
     {
-        $this->user = $user;
+        $this->middleware('auth');
     }
 
     /**
@@ -28,6 +30,6 @@ class WelcomeAgain extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.welcome-again');
+        return $this->markdown('emails.orderemail');
     }
 }

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color:#e77748">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}" style="color:white" >
+            <a class="navbar-brand" href="{{ url('/') }}" style="color:white;font-size: 30px;" >
                 {{ config('app.name', 'Takeout') }}
                 
             </a>
@@ -21,36 +21,46 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
-                        <li><a class="nav-link" style="color:white" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                        <li><a class="nav-link" style="color:white" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                        <li><a class="nav-link" style="color:white;font-size: 30px" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                        <li><a class="nav-link" style="color:white;font-size: 30px" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                     @else
 
                     <li>                                
                             <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:36px; color: white" class="fa fa-shopping-cart"></i>
-                                <span id="cartitems"> 
+                                <span> 
+                                    <strong>
+                                <span id="cartitems" style="color:white; font-size: 30px;">
                                 <?php if(Session::has('carttot')) :?>
-                                <strong>
-                                {{Session::get('carttot')}} 
-                                </strong>                                            
-                                <?php else : ?>
                                 
-                                <span style="color:white">  0</span>                                   
+                                            {{Session::get('carttot')}} 
+                                                                           
+                                <?php else : ?>                
+                                 0                                 
                                 <?php endif;?>
+
+                            </span>                                
+                        </strong>
                                 </span>
                             </a> 
                     </li>
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                            <a id="navbarDropdown" style="font-size: 30px;color: white" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ strtoupper(Auth::user()->name) }} <span style="font-size: 20px" class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/orders">
+                                    <strong> {{ __('My Orders') }} </strong>
+                                    </a>
+                                    <div role="separator" class="dropdown-divider"></div>
+                                
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
+                                  <strong>  {{ __('Logout') }}  </strong>
+                                </a>                              
+                                
+                                
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>

@@ -2,11 +2,11 @@
 
 @section('content')
 
-<div class="container">
+<div class="container" style="height: 500px">
 
     <div class="row">
 
-        <div class="col-md-3">
+        <div class="col-md-2">
                 <ul class="nav flex-column">
                         
                         <li class="nav-item">
@@ -18,7 +18,7 @@
                       
                       </ul>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
             
 <table class="table table-hover" id="chefstab" style="margin: 20px;display: none;">
     <thead>
@@ -30,6 +30,9 @@
         <th scope="col">Orders_1_Half</th>
         <th scope="col">Orders_2_Half</th>
         <th scope="col">Bank Account</th>
+        <th scope="col">Bank Branch</th>
+        <th scope="col">Bank Institution</th>
+        <th scope="col">Bank Name</th>
 
       </tr>
     </thead>
@@ -43,8 +46,11 @@
     <td> ${{ $chef['tot']}}  </td>
     <td> ${{ $chef['tot1']}}  </td>
     <td> ${{ $chef['tot2']}}  </td>
-    <td> {{ $chef['bank']}}  </td>    
-    
+    <td> {{ $chef['bankacntnum']}}  </td>
+    <td> {{ $chef['bankbranch']}}  </td>
+    <td> {{ $chef['bankinstitution']}}</td>
+    <td> {{ $chef['bankname']}}  </td>    
+
 </tr>
 
         @endforeach

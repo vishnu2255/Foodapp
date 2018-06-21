@@ -14,10 +14,28 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+          
+        $this->middleware('auth');
+    }
+
     public function index()
     {   
         // $da = DATE();
         // dd(getdate()['mon']);
+
+        $user = Auth::user();
+
+        $admin = DB::table('admin')
+            ->where('email','=',$user->email)
+            ->get();        
+
+            if(!$admin->count()>0)
+            {
+                return "You dont have premission";
+
+            }
 
         $strtdate = '2018-' . getdate()['mon'] . '-00 00:00:00';
         $middate = '2018-' . getdate()['mon'] . '-00 00:00:00';
@@ -26,8 +44,8 @@ class AdminController extends Controller
 
         $cheforders = DB::table('orders')
         ->join('chef_users','orders.chef_id','=','chef_users.id')
-        ->select(DB::raw('SUM(orders.totalamnt) as totamnt'),'chef_users.name','chef_users.email','chef_users.bank_account_number','orders.chef_id')
-        ->groupBy('chef_users.name','chef_users.email','chef_users.bank_account_number','orders.chef_id')
+        ->select(DB::raw('SUM(orders.totalamnt) as totamnt'),'chef_users.name','chef_users.email','chef_users.bank_account_number','chef_users.bank_name','chef_users.bank_institution','chef_users.bank_branch','orders.chef_id')
+        ->groupBy('chef_users.name','chef_users.email','chef_users.bank_account_number','orders.chef_id','chef_users.bank_name','chef_users.bank_institution','chef_users.bank_branch')
         ->get();
 
 
@@ -41,7 +59,10 @@ class AdminController extends Controller
             $temp['email'] = $chef->email;
             $temp['tot'] = $chef->totamnt;
 
-            $temp['bank'] = $chef->bank_account_number;
+            $temp['bankacntnum'] = $chef->bank_account_number;
+            $temp['bankbranch'] = $chef->bank_branch;
+            $temp['bankinstitution'] = $chef->bank_institution;
+            $temp['bankname'] = $chef->bank_name;
 
             $sum1 =  DB::table('orders')
             ->join('chef_users','orders.chef_id','=','chef_users.id')

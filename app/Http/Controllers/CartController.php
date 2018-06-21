@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderConfirmMail;
 
 class CartController extends Controller
 {
@@ -26,6 +28,8 @@ class CartController extends Controller
      */
     public function index()
     {
+
+        // Mail::to(Auth::user()->email)->send(new OrderConfirmMail());
         $user = Auth::user();            
 // dd(Session::get('cartamnt'));
 $crtdel =   DB::table('cart')
@@ -165,6 +169,8 @@ $tmpkey = $tmpid . '_' . $tmpname.'_'.$tmpsum;
 // echo"</pre>";
 
 // die(var_dump($drinks));
+
+        // Mail::to(Session::get('emailid'))->send(new WelcomeAgain());
         return view('chefs.cart')->with('chefcarts',$finalarray)->with('drinks',$drinks);
 
 

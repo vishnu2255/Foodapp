@@ -1,8 +1,8 @@
 @include('chefs.carouselheader')
 
-<nav class="navbar navbar-default navbar-fixed-top" style="padding-bottom: 20px;background-color:#e77748;">
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#e77748;">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}" style="color: white">
+        <a class="navbar-brand" href="{{ url('/') }}" style="color: white;font-size: 30px;">
             {{ config('app.name', 'Takeout') }}
         </a>
         {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,24 +20,30 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                    <li><a class="nav-link" style="font-size: 30px;" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                    <li><a class="nav-link" style="font-size: 30px;" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                 @else
 
                 
                         
                 <li>                                
-                        <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:36px; color: white" class="fa fa-shopping-cart"></i>
-                            <span id="cartitems"> 
-                            <?php if(Session::has('carttot')) :?>
-                            <strong>
-                            {{Session::get('carttot')}} 
-                            </strong>                                
-                            <?php else : ?>
-                           <strong>0
-                           </strong>
-                            <?php endif;?>
-                            </span>
+                        <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:"> <i style="font-size:36px; color: white" class="fa fa-shopping-cart"></i>
+                           
+                            <span> 
+                                    <strong>
+                                <span id="cartitems" style="color:white; font-size: 30px;">
+                                <?php if(Session::has('carttot')) :?>
+                                
+                                            {{Session::get('carttot')}} 
+                                                                           
+                                <?php else : ?>                
+                                 0                                 
+                                <?php endif;?>
+
+                            </span>                                
+                        </strong>
+                                </span>
+
                         </a> 
                 </li>
 
@@ -51,21 +57,41 @@
                     </li> --}}
                 
                     <li class="dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                        <a id="navbarDropdown" style="font-size:30px;color: white;" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{strtoupper(Auth::user()->name) }} <span class="caret"></span>
                         </a>
 
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                
+                                <li><a class="dropdown-item" href="/orders">
+                                    <strong> {{ __('My Orders') }} </strong>
+                                 </a></li>                            
+                                    <li role="separator" class="divider"></li>                              
+                                <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                      document.getElementById('logout-form').submit();">
+                                    <strong> {{ __('Logout') }} </strong>
+                                     </a>
+                                </li>                                                                                            
+                                {{-- <li role="separator" class="divider"></li> --}}
+                            {{-- <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 
+                            <a class="dropdown-item" href="/orders">
+                                {{ __('My Orders') }}
+                            </a> --}}
+
+
+
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
-                        </div>
+                        </ul>
                     </li>
                 @endguest
             </ul>
@@ -158,14 +184,14 @@
 <div class="row">
         <div class="col-sm-6">
                 <p class="text-muted" style="font-family: 'Times New Roman', Times, serif; color: red; font-size:20px; " >{{ strtoupper($item->itm_name)}}</p>	 
-                <p class="text-muted" style="font-family: 'Times New Roman', Times, serif;font-size:15px " >{{$item->itm_desc}}</p>	
+                <p class="" style="font-family: 'Times New Roman', Times, serif;font-size:15px " > <strong>{{$item->itm_desc}}</strong> </p>	
                
             </div>
             <div class="col-sm-6">
                     <p class="item-price" style="font-family: 'Times New Roman', Times, serif; font-size:20px;color: red"  id="{{$item->id}}"><b>${{$item->itm_price}}</b></p>    
                     {{-- <p style="font-family: 'Times New Roman', Times, serif; color: red">{{$item->itm_order_prep_time}} mints</p>
                                                       --}}
-                                                      <p class="text-muted" style="font-size:15px"> Points: {{$item->itm_price*20}}</p>
+                                                      <p class="" style="font-size:15px"> <strong>Points: {{$item->itm_price*20}}</strong></p>
                </div>
 </div>                 
                  
@@ -203,7 +229,7 @@
 </div>
 
 </div>
-
+ 
 </div>
 
 <?php $carid++; ?>

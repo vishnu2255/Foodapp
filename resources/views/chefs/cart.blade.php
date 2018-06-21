@@ -188,7 +188,7 @@
 </table>
 
 <button id="savedrinks" class="ml-3 btn btn-danger savedrinks"> 
-    Add To Cart
+    Save Changes
 </button>
 
 </div>

@@ -6,7 +6,6 @@
 
 {{-- <script src="https://js.stripe.com/v3/"></script> --}}
 
-
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
     Stripe.setPublishableKey('pk_test_38bijvWZk6dGkZe9s47jqepM');
@@ -47,6 +46,8 @@ function stripeResponseHandler(status, response) {
 
         // Submit the form:
         $form.get(0).submit();
+
+        
     }
 };
 </script>

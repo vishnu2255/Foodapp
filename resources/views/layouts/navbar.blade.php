@@ -21,15 +21,15 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
-                        <li><a class="nav-link" style="color:white;font-size: 30px" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                        <li><a class="nav-link" style="color:white;font-size: 30px" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                        <li><a class="nav-link" style="color:white;font-size: 14px" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                        <li><a class="nav-link" style="color:white;font-size: 14px" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                     @else
 
                     <li>                                
-                            <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:36px; color: white" class="fa fa-shopping-cart"></i>
+                            <a  class="nav-link" href="/cart" style="margin-top: 0px; background-color:  "> <i style="font-size:25px; color: white" class="fa fa-shopping-cart"></i>
                                 <span> 
                                     <strong>
-                                <span id="cartitems" style="color:white; font-size: 30px;">
+                                <span id="cartitems" style="color:white; font-size: 14px;">
                                 <?php if(Session::has('carttot')) :?>
                                 
                                             {{Session::get('carttot')}} 
@@ -44,7 +44,7 @@
                             </a> 
                     </li>
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" style="font-size: 30px;color: white" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" style="font-size: 14px;color: white" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ strtoupper(Auth::user()->name) }} <span style="font-size: 20px" class="caret"></span>
                             </a>
 
@@ -71,3 +71,5 @@
             </div>
         </div>
     </nav>
+
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}

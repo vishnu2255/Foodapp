@@ -71,8 +71,8 @@ return redirect('/dishes');
             $cart = serialize(Session::get('cart'));
             $drinks = serialize(Session::get('drinks'));
 
-        DB::table('orders')
-        ->insert(
+        $orderid =  DB::table('orders')
+        ->insertGetId(
             [  'chef_id' => Session::get('chefid'),
                'customer_id' =>  Session::get('userid'),
                'menu_item_id' => 1,
@@ -81,10 +81,11 @@ return redirect('/dishes');
                'drnkscart' => $drinks,
                'totalamnt' => $am,
                'isActive'  => 'yes'
-
+             
             ]
         );
 
+        Session::put('orderid',$orderid);
         DB::table('cart')
         ->where('customer_id','=',Session::get('userid'))
         ->where('isActive','=','yes')
@@ -96,7 +97,8 @@ return redirect('/dishes');
         // ->update(['isActive' => 'no']);
 
         DB::table('drinkscart')->where('user_id','=',Session::get('userid'))->delete();
-
+        $fire = Session::get('userid').'_' .Session::get('chefid');
+        Session::put('firebase', $fire);        
         Session::forget('cartamnt');
         Session::forget('totsum');
         Session::forget('cart');
@@ -108,7 +110,7 @@ return redirect('/dishes');
         
         // Mail::to(Session::get('emailid'))->send(new WelcomeAgain());
         Mail::to(Auth::user()->email)->send(new OrderConfirmMail());
-        
+       
         // Session::forget('chefid');
 
         // return redirect()->action('OrderController@Index',['status','success']);

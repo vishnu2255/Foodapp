@@ -4,7 +4,7 @@
 
 
 {{csrf_field()}}
-<div id="map-canvas" class="container" style="width:800px;height: 100%; margin-left: 200px;text-align: center" >
+<div id="map-canvas" class="container" style="width:100%;height: 100%; margin-left: 10px;text-align: center" >
 
 </div>
 

@@ -1,8 +1,19 @@
 
         $(document).ready(function(){
-
-               
-                       
+            
+                $("#mapidbtn").click(function(){
+                // alert(23);
+                var Nwin = window.open($(this).prop('href'),'name','width=1000,height=800');
+                
+                if(window.focus)
+                {
+                    Nwin.focus();
+                }
+                
+                
+                return false;
+                
+                });                       
 
             var drnksarray=[];
 

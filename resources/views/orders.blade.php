@@ -111,7 +111,7 @@
 
 @endif 
 
-
+@csrf
 
 {{-- old orders --}}
 
@@ -157,11 +157,11 @@
 
         {{-- @include('map2') --}}
 
-<a class="btn btn-primary btn-lg" href="/mapslocation">
+{{-- <a class="btn btn-primary btn-lg" href="http://127.0.0.1:8181/mapslocation" id="mapidbtn">
 Click here to find the route    
-</a>        
+</a>         --}}
 <div style="width: 400px">
-    <a href="/mapslocation">
+    <a href="http://127.0.0.1:8181/mapslocation" id="mapidbtn">
         <img src="../images/maps.jpg" alt="" width="100%"></a>
 </div>
         
@@ -187,19 +187,39 @@ Click here to find the route
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 <script>
 // Initialize Firebase
-var config = {
-apiKey: "AIzaSyDlvh5ZOItKn1VTpdTWmndVObMtyi8WyS8",
-authDomain: "ihearttakeout-578aa.firebaseapp.com",
-databaseURL: "https://ihearttakeout-578aa.firebaseio.com",
-projectId: "ihearttakeout-578aa",
-storageBucket: "ihearttakeout-578aa.appspot.com",
-messagingSenderId: "1026709201120"
-};
-firebase.initializeApp(config);
+
 </script>
 
 <script>
 // $("#statusorder").text(123);
+
+        // $(document).ready(function(){
+                    var orid;
+                    var config = {
+                    apiKey: "AIzaSyDlvh5ZOItKn1VTpdTWmndVObMtyi8WyS8",
+                    authDomain: "ihearttakeout-578aa.firebaseapp.com",
+                    databaseURL: "https://ihearttakeout-578aa.firebaseio.com",
+                    projectId: "ihearttakeout-578aa",
+                    storageBucket: "ihearttakeout-578aa.appspot.com",
+                    messagingSenderId: "1026709201120"
+                    };
+                    firebase.initializeApp(config);
+         
+                    $.post('/firebase',{id:123,'_token': $('input[name=_token]').val()},function(data){
+                    console.log(data);
+                    var tm = data.split('_');
+                    orid = tm[0];
+                    userId = tm[1];
+                    chefid = tm[2];
+                    sta  = 'pending';
+                    writeUserData(userId,orid,chefid,sta);
+                    $("#statusorder").text(sta);  
+
+                   });
+
+        // });
+
+
 function writeUserData(userId, orid, chid , sta) {
 firebase.database().ref('orders/' + orid).set({
 userid: userId,
@@ -207,7 +227,7 @@ chefid: chid,
 status: sta
 });
 }
-var sts = firebase.database().ref('/orders/1');
+var sts = firebase.database().ref('/orders/'+ordid);
 
 sts.on('value',function(snapshot){
   console.log(snapshot.val());
@@ -217,6 +237,11 @@ sts.on('value',function(snapshot){
 
 </script>
 
+<script>
+
+
+
+</script>
 
 
 @endsection

@@ -30,19 +30,21 @@ Route::get('/', function () {
   // $map = GMaps::create_map();
 
   // return view('map')->with('map',$map);
-     return view('welcome');
-    //  return view('fireba1');
+    // return view('test');
+    //  return view('welcome');     
+     return view('fireba1');
     //  return view('map2');
    // return view('chefs/profile');
 });
 
+Route::post('/firebase', 'ListController@store');
 
 Route::get('/mapslocation', function () {
   
     return view('map2');
   
 });
-
+Route::get('/list', 'ListController@search');
 
 Route::post('/maps', 'AdminController@store');
 

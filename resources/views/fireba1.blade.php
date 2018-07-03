@@ -75,17 +75,19 @@
     // fb.child("custid").set("22");
     // fb.child("state").set("pending");
 
+    var uid = 22;
+    var key = firebase.database().ref('/orders').push().key;
 
-    //writeUserData('1','1','1','pending');
+    writeUserData(uid,'221','1123','pending',key);
 
-    function writeUserData(userId, orid, chid , sta) {
-  firebase.database().ref('orders/' + userId).set({
-    orderid: orid,
+    function writeUserData(userId, orderid, chid , sta ,key) {
+    firebase.database().ref('orders/' + userId + '/' + orderid).set({    
     chefid: chid,
-    status: sta
+    status: sta,
+    token: key
   });
 }
-  var sts = firebase.database().ref('/orders');
+  var sts = firebase.database().ref('/orders/'+uid);
 
   sts.on('value',function(snapshot){
       console.log(snapshot.val());

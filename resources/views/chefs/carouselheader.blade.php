@@ -413,3 +413,113 @@ function()
 {{csrf_field()}}
 </head>
 <body>
+
+
+
+
+
+
+
+
+	
+<nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color:#e77748;">
+		<div class="container-fluid" style="">
+				  
+				<ul class="navbar-nav mr-auto">
+	 <a class="navbar-brand ml-auto" href="{{ url('/') }}" style="color: white">         
+					<img src="../images/Ihearttakeout_final.png" width="60%">
+					</a>
+					
+				</ul>
+							 
+			   
+	   <div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarSupportedContent"  >
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+			
+		</div>
+		
+				  
+			{{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a> --}}
+	
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<!-- Left Side Of Navbar -->
+				
+			 
+	
+				<!-- Right Side Of Navbar -->
+				<ul class="nav navbar-nav navbar-right">
+					<!-- Authentication Links -->
+					@guest
+						<li><a class="nav-link" style="font-size: 14px;" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+						<li><a class="nav-link" style="font-size: 14px;" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+					@else
+	
+					
+							
+					<li>                                
+							<a  class="nav-link" href="/cart" style="margin-top: 20px; "> <i style="font-size:25px; color: white" class="fa fa-shopping-cart"></i>
+							   
+								<span> 
+										<strong>
+									<span id="cartitems" style="color:white; font-size: 20px;">
+									<?php if(Session::has('carttot')) :?>
+									
+												{{Session::get('carttot')}} 
+																			   
+									<?php else : ?>                
+									 0                                 
+									<?php endif;?>
+	
+								</span>                                
+							</strong>
+									</span>
+	
+							</a> 
+					</li>
+		   
+						{{-- <li>
+								<a  class="btn btn-info btn-lg" style="width: 150px; margin-top: 10px; background-color: gold">
+										<span class="glyphicon glyphicon-shopping-cart"></span> Cart 22
+								</a>
+						</li> --}}
+					
+						<li class="dropdown">
+							<a id="navbarDropdown" style="font-family: Helvetica;margin-top: 20px;font-size:20px;color: white;" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" v-pre>
+								{{strtoupper(Auth::user()->name) }} <span class="caret"></span>
+							</a>
+	
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">                                  
+										
+										<li><a class="dropdown-item" href="/profile">
+										<strong> {{ __('My Profile') }} </strong>
+									 </a></li>                            
+										<li role="separator" class="divider"></li>                              
+									<li>                                                                                                
+									<li><a class="dropdown-item" href="/orders">
+										<strong> {{ __('My Orders') }} </strong>
+									 </a></li>                            
+										<li role="separator" class="divider"></li>                              
+									<li>
+											<a class="dropdown-item" href="{{ route('logout') }}"
+											onclick="event.preventDefault();
+														  document.getElementById('logout-form').submit();">
+										<strong> {{ __('Logout') }} </strong>
+										 </a>
+									</li>                                                                                            
+								
+	
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+									@csrf
+								</form>
+							</ul>
+						</li>
+					@endguest
+				</ul>
+			</div>
+		</div>
+	</nav>

@@ -11,6 +11,46 @@
 |
 */
 
+Route::get('/post1', function () {
+  
+    return view('post');
+  
+});
+Route::get('/postsall', 'PostController@index');
+
+Route::get('/posts/{id}', 'PostController@show');
+
+Route::post('/post/store', 'PostController@store');
+Route::post('/comment/store', 'Comments@store');
+
+Route::get('/addblog', function () {
+  
+    return view('addblog');
+  
+});
+
+Route::get('/pos', function () {
+  
+    return view('blogpost2');
+  
+});
+
+Route::get('/bl', function () {
+  
+    return view('blog');
+  
+});
+
+Route::get('/temp', function () {
+  
+    return view('temp');
+  
+});
+
+Route::get('/blogs', 'BlogController@index');
+Route::get('/blogs/{id}', 'BlogController@show');
+
+Route::post('postblog', 'BlogController@store');
 
 Route::get('/maps', 'AdminController@store');
 

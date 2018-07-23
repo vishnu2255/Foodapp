@@ -3,7 +3,7 @@
 
 @section('content')
 
-
+@csrf
 @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
@@ -191,10 +191,10 @@ Click here to find the route
 </script>
 
 <script>
-// $("#statusorder").text(123);
-
         // $(document).ready(function(){
-                    var orid;
+                 
+                    var orderid;
+                    var chefid;
                     var config = {
                     apiKey: "AIzaSyDlvh5ZOItKn1VTpdTWmndVObMtyi8WyS8",
                     authDomain: "ihearttakeout-578aa.firebaseapp.com",
@@ -204,46 +204,148 @@ Click here to find the route
                     messagingSenderId: "1026709201120"
                     };
                     firebase.initializeApp(config);
-         
+                    // var orid,chid;
                     $.post('/firebase',{id:123,'_token': $('input[name=_token]').val()},function(data){
                     console.log(data);
-                    var tm = data.split('_');
-                    orid = tm[0];
-                    userId = tm[1];
-                    chefid = tm[2];
-                    sta  = 'pending';
-                    writeUserData(userId,orid,chefid,sta);
+                    // tm = data.split('_');
+                    // orid = tm[0];
+                    // userId = tm[1];
+                    // chid = tm[2];
+                     orid = 1000  ;
+                    userId = 100;
+                    chid = 506;
+                    // window.orderid = 124;
+                    // userId = 100;
+                    // window.chefid = 502;
+                    // tmp = firebase.getToken();
+                    // console.log(tmp);
+                    // var token = firebase.getInstance().getToken();
+                    // console.log(token);
+                    sta  = "pending";
+                    // writeUserData(10,124,502,"pending");    
+                    writeUserData(userId,orid,chid,sta);
                     $("#statusorder").text(sta);  
-
+                    
                    });
 
         // });
+    </script>
+    <script>
+var orderid,chefid;
+function writeUserData(userId, orid, chid , sta) {    
+//  console.log(sta);  
+orderid = orid;
+chefid = chid;
 
+firebase.database().ref('orders/' + chid + '/' + orid).set({
 
-function writeUserData(userId, orid, chid , sta) {
-firebase.database().ref('orders/' + orid).set({
-userid: userId,
-chefid: chid,
-status: sta
+state: sta
+});
+// console.log(orderid);
+
+var sts = firebase.database().ref('orders/'+chid + '/'+ orid );
+
+sts.on("value",function(snapshot){
+//   console.log(snapshot.val()['status']);
+console.log(snapshot.val());
+
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+
+//   status = snapshot.val()['state'];
+//   console.log(status);
+//   $("#statusorder").text(status);
 });
 }
-var sts = firebase.database().ref('/orders/'+ordid);
-
-sts.on('value',function(snapshot){
-  console.log(snapshot.val());
-  status = snapshot.val()['status'];
-  $("#statusorder").text(status);
-});
-
 </script>
-
-<script>
-
-
-
-</script>
-
 
 @endsection
 
 {{-- @include('map2') --}}
+
+
+   
+   
+   
+<img src="/../img/YCG_Footer.jpg" style="margin-top: 75px;" width="100%">
+<div style=" width:100%; height:90px; background-color:#0794D3"> </div>  
+
+  <div class="" style="background-color: #5b5758;height:300px">
+  
+    <div class="container">
+    
+    <div class="row">
+    <div class="col-md-6">
+    
+    </div>     
+    <div class="col-md-6" style="text-align:left;">
+    
+     @if(Session::has('status'))   
+    <h4 style="text-align:left;color:#FFF">Thank You For Subscribing !! </h4>
+    @else
+    <h4 style="text-align:left;color:#FFF">Subscribe Here For Our News Letter	</h4>
+    @endif
+    
+    </div>
+    </div>
+    
+        <div style="font-family: Helvetica; font-size: 15px;background-color: ">
+
+        </div>
+
+
+    <div class="row">
+    <div class="col-md-6" style=";text-align:left;">
+                  
+     <h2 style="color:#FFF">More from YourCarnivalGuide.com</h2>
+     <p1 style="color: whitesmoke">Copyright © 2018 Your Carnival Guide. All rights reserved.</p1>
+     
+    </div>
+    
+    <div class="col-md-6" style="margin-top: 15px;text-align:left;"> 
+<form class="form-inline" action="/subscribe" method="post" style="margin-top: 25px;">
+@csrf
+   <input class="form-control mr-sm-2" name="name"  type="text" placeholder="Name" aria-label="Search">
+   <input class="form-control mr-sm-2" name="email" type="email" placeholder="Email" aria-label="Search">
+   <button class="btn btn-primary my-2 my-sm-0" type="submit">Subscribe</button>
+</form>
+
+    </div>
+
+   </div>
+   <div class="row" style="margin-top: 15px;">
+     <div class="col-md-6">     
+
+     </div>
+     <div class="col-md-6" style="text-align:left;">
+      <h2 style="color:#FFF;">Let's Socialize</h2>
+      <a href="https://www.facebook.com/Torontocarnivalguide/"  target="_blank"><img src="http://carnivalguideintl.com/img/icons/Facebook_icon.gif" width="50xp" height="50px"></a>
+      <a href="https://www.instagram.com/toronto_carnival_guide/" target="_blank"><img src="http://carnivalguideintl.com/img/icons/instagram_icon.png" width="50xp" height="50px"></a>
+   
+     </div>
+
+     
+   </div>   
+   </div>
+   </div>
+
+
+   <style>
+    .list-group-item :hover{
+    color: rgba(yellow);
+    border: 1px solid;
+    opacity: 1;
+    cursor: pointer;
+   }
+   </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(".list-group-item").click(
+    function(e){
+e.preventDefault();
+$(".list-group-item").css("background-color","white");
+$(this).css("background-color","#e77748");
+    }
+);
+</script>

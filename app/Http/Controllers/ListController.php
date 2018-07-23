@@ -53,7 +53,7 @@ class ListController extends Controller
                 
                 return $Searchresu;
         }
-
+       
         if($dish!=null)
         {
             $dsh = DB::table('menu_items')
@@ -86,12 +86,23 @@ class ListController extends Controller
         //return 'Pharmacy 2020 Toronto';
 
         //return (Session::get('chefaddress'));
-        return Session::get('orderid').'_'.Session::get('userid').'_'.Session::get('chefid');
+        $tok = DB::table('chef_users')
+            ->select('fcm_token')
+            ->where('id','=',Session::get('chefid'))
+            ->first();
+        $chefid = Session::get('chefid');
+        $orderid = Session::get('orderid');
+        $userid =  Session::get('userid');
+        $token = $tok->fcm_token;         
+        
+        Session::forget('chefid');
+        Session::forget('orderid');
+        Session::forget('userid');
+
+        // return Session::get('orderid').'_'.Session::get('userid').'_'.Session::get('chefid').'_'.$token;
+        return $orderid . '_' . $userid . '_' . $chefid . '_' . $token;
     //    return 123;
-
-
-
-
+    
     }
 
 

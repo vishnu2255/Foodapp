@@ -25,16 +25,13 @@ class CheckOutController extends Controller
     
     public function index()
     {
-        //
-
         $user = Auth::user();      
         // var_dump($user->id);
-
         $cart_users = DB::table('cart')
                          ->join('menu_items','menu_items.id','=','cart.menu_item_id')   
                          ->where('customer_id',Session::get('userid'))
                          ->get();
-
+            
         // var_dump($cart_users);                 
         // foreach($cart_users as $cart_user)
         // {

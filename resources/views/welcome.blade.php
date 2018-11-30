@@ -6,39 +6,27 @@
 {{-- <div class="container"> --}}
 
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="20000">
-                {{-- <ol class="carousel-indicators">
-                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                  <li data-target="#myCarousel" data-slide-to="1"></li>
-                  <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol> --}}
+
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <img class="first-slide" src="../images/Food_6.jpg" alt="First slide" style="width:100%">
                     <div class="container">
                       <div class="carousel-caption">
-                            {{-- <form class="form-inline" method="POST" action="/dishes" style="padding-left:25%; padding-bottom:20%">                                  
-                              @csrf
-                                    <div class="form-group">
-                                        <input type="text" name="searchcity" style="width:200px;margin-right: 5px;border: solid" class="searchc form-control" placeholder="City">                                    
-                                       <div> <span>Test</span> </div>
-                                        <input type="text" name="searchdish" style="width:200px;margin-right: 5px;border: solid" class="searchd form-control" placeholder="Dish">
-                                    </div>
-                                    <button type="submit" class="btn btn-danger btn-lg">Find Chefs</button>
-                            </form> --}}
-                            
-                            <div class="container" style ="  background-color: salmon ;background-color:; width: 800px;height: 250px">
-                            <form class="form" method="POST" action="/dishes" style="padding-left:10%; padding-bottom:20%;padding-top: 10%">                                  
-                              @csrf
-                                   <div class="row">
-<div class="col-md-4">
-  <div class="ui-widget">
-      {{-- <label for="searchcity">City: </label> --}}
+
+          <div class="container" style ="  background-color: salmon ;background-color:; width: 800px;height: 250px">
+          <form class="form" method="POST" action="/dishes" style="padding-left:10%; padding-bottom:20%;padding-top: 10%">                                  
+          @csrf
+
+<div class="row">
+
+<div class   = "col-md-4">
+  <div class = "ui-widget">
   <input type="text" name="searchcity" style="width:200px;margin-right: 5px;border: solid" id="searchcity" class="searchc form-control" placeholder="City">                                    
   </div>
 </div>
 
 <div class="col-md-4">
-    <div class="ui-widget">
+  <div class="ui-widget">
   <input type="text" name="searchdish" style="width:200px;margin-right: 5px;border: solid" id="searchd" class="searchd form-control" placeholder="Dish">
   </div>
   </div>

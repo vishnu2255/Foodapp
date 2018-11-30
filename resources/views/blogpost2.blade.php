@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.blogapp')
 {{-- <link href="{{ asset('css/blogcss.css') }}" rel="stylesheet"> --}}
 @section('content')
 

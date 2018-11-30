@@ -233,7 +233,7 @@ Click here to find the route
     <script>
 var orderid,chefid;
 function writeUserData(userId, orid, chid , sta) {    
-//  console.log(sta);  
+//  console.log(st a);  
 orderid = orid;
 chefid = chid;
 

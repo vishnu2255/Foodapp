@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.blogapp')
 {{-- <link href="{{ asset('css/blogcss.css') }}" rel="stylesheet"> --}}
 
 @section('content')
@@ -22,7 +22,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-
+            
           @foreach($blogs as $blog)
             
           <div class="post-preview">
@@ -158,5 +158,125 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/clean-blog.min.js"></script>
-
 @endsection
+
+
+
+<div class="row">
+
+<div class="col-md-6">
+
+<div class="row">
+
+  <div class="col-md-6">
+  
+    <div class="post-preview">
+      <a href="post.html">
+        <h2 class="post-title">
+          Failure is not an option
+        </h2>
+        <h3 class="post-subtitle">
+          Many say exploration is part of our destiny, but it’s actually our duty to future generations.
+        </h3>
+      </a>
+      <p class="post-meta">Posted by
+        <a href="#">Start Bootstrap</a>
+        on July 8, 2018</p>
+    </div>
+  
+  </div>  
+
+</div>
+
+
+</div>
+
+
+<div class="col-md-6">
+  
+</div>
+
+
+</div>
+
+
+<div class="row container">
+
+  <div class="col-md-6">
+  
+  <h1 style="text-align:left">Recent Posts  </h1>
+  
+  <div class="row">
+  
+    <div class="col-md-6">
+    
+  <div class="row">
+  
+  <div class="col-md-6" style="overflow:hidden">
+  
+  <img src="img/slides/Alana_2017.jpg" alt="" width="100%">
+  
+  </div>
+  
+  <div class="col-md-6" style="">
+  
+      <div class="post-preview">
+        <a href="post.html" style="color:black">
+          <h6 class="post-title">
+            Failure is not an option
+          </h6>
+          
+        </a>
+        <p class="post-meta">
+          
+      July 8, 2018</p>
+      </div>
+  
+  </div> 
+  </div>  
+
+    
+    </div>
+    
+    
+    <div class="col-md-6">
+    
+       <div class="row">
+  
+        <div class="col-md-6" style="overflow:hidden">
+        
+        <img src="img/slides/Alana_2017.jpg" alt="" width="100%">
+        
+        </div>
+        
+        <div class="col-md-6" style="">
+        
+            <div class="post-preview">
+              <a href="post.html" style="color:black">
+                <h6 class="post-title">
+                  Failure is not an option
+                </h6>
+                
+              </a>
+              <p class="post-meta">
+                
+            July 8, 2018</p>
+            </div>
+        
+        </div> 
+        </div>   
+    
+    </div>  
+  
+  </div>
+  
+  
+  </div>
+  
+  
+  <div class="col-md-6">
+    
+  </div>
+  
+  
+  </div>

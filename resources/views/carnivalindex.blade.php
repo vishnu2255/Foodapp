@@ -1,59 +1,46 @@
-@extends('layouts.app2')
+@extends('layouts.app')
 
 @section('content')
 
-  
+<div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel" data-interval="100000">
+        <div class="carousel-inner w-100" role="listbox">
 
-<div id="myCarousel" class="carousel slide" style="height:600px;overflow:hidden;" data-ride="carousel" data-interval="20000">
+                <div id="1" class="carousel-item row no-gutters active" style="">
+                    <div class="row">                               
+                                <img id="" width="100%" src="img/slides/Alana_2017.jpg" alt="Event">                                     
+                     </div>
+                </div>     
+          
+                <div id="1" class="carousel-item row no-gutters" style="">
+                        <div class="row">                               
+                                    <img id="" width="100%" src="img/slides/Alana_2017.jpg" alt="Event">                                     
+                         </div>
+                    </div>  
 
-                
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img class="first-slide" src="img/slides/Solange_2016.jpg" alt="First slide" style="width:100%">
-                  
-                  </div>
-                  
-                   <div class="carousel-item">
-                    <img class="first-slide" src="img/slides/group.jpg" alt="First slide" style="width:100%">
-                  
-                  </div>
-                  
-                   <div class="carousel-item">
-                    <img class="first-slide" src="img/slides/Tiffany_2015.jpg" alt="First slide" style="width:100%">
-                  
-                  </div>
-                  
-                   <div class="carousel-item">
-                    <img class="first-slide" src="img/slides/guy_girls.jpg" alt="First slide" style="width:100%">
-                  
-                  </div>
-                  
-                   <div class="carousel-item">
-                    <img class="first-slide" src="img/slides/Alana_2017.jpg" alt="First slide" style="width:100%">
-                  
-                  </div>
-                  
-                  
-                 </div> 
+                    <div id="1" class="carousel-item row no-gutters" style="">
+                            <div class="row">                               
+                                        <img id="" width="100%" src="img/slides/Alana_2017.jpg" alt="Event">                                     
+                             </div>
+                        </div>   
                  
-                   <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-  
-               
-              </div>
+          </div>                                      
+      
+        <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 
 
-  <br><br><br><br><br>
 
  
 <div class="container" style="position:relative">
-              <h1 align="center" > We are here to enhance your overall carnival experience </h1>
+        <br><br><br><br><br>
+        <h1 align="center" > We are here to enhance your overall carnival experience </h1>
          
         <h3 style="color:#666; text-align:center">Carnival Guide Intl is the ultimate resource for visitors and residents, as it covers everything they need to know about what to do, what to see, how to travel, and where to eat during the weeks of Carnival.</h3> <br><br><br><br><br><br><br>
          
@@ -115,8 +102,6 @@
            
             </div>
         @endif
-        
-        {{--
 
         <h1 align="center" style="color:#FFF">Time to Vote </h1>
   
@@ -125,9 +110,7 @@
  
  <a class="btn btn-success btn-lg btn-block" href="/votes">Vote Now</a>
  
-  --}}
-  
-  
+ -->
   
    <div class="row">
                     <form role="form" method="post" action="/save" id="" enctype="multipart/form-data" >
@@ -187,16 +170,16 @@
   <div class="col-md-4">
   
    <label for="name"> Head Shot:</label>
-                            <input type="file" class="input-lg" name="image[]" multiple required>
+                            <input type="file" class="form-control input-lg" name="image[]" multiple required>
                         
   </div>
   <div class="col-md-4">
   <label for="name"> Full Body 2:</label>
-                            <input type="file" class="input-lg" name="image[]" multiple required>
+                            <input type="file" class="form-control input-lg" name="image[]" multiple required>
   </div>
   <div class="col-md-4">
   <label for="name"> Full Body 1:</label>
-                            <input type="file" class="input-lg" name="image[]" multiple required>
+                            <input type="file" class="form-control input-lg" name="image[]" multiple required>
   </div>
 </div>                       
 <br>
@@ -216,105 +199,3 @@
 
 
 @endsection
-
-
-@section('content2')
-@include('carnivallayouts.footer2')
-@endsection
-
-
-
-
-<div class="" style="background-color:white;">
-          
-          <div class="row">
-
- <div class="col-md-6 ">
- 
- <h1 style="text-align:left;margin-left:15px;color:red;">News</h1>
- 
- <div class="row">
- 
-
-
- @foreach($blogs->chunk(4) as $blogs)	
- @foreach($blogs as $blog)
-      
- <div class="col-md-6" style="text-align:left;padding-right:15px;">
- 
- <div style="overflow:hidden;margin-top:5px;width:250px;">
- 
-<img src="/../storage/blogs/{{$blog->name}}/{{$blog->imagepath}}" alt="" width="100%">
- 
- </div>
- 
- <div class="post-preview" style="margin-left:5px;">
-       <a href="#"  style="color:black;">
-         <h5 class="post-title">
-          {{$blog->title}}
-         </h5>
-         
-       </a>
-       <p class="post-meta">
-     {{date($blog->created_at)}}    
-     
-     </p>
- </div>
- 
- </div>
- 
-       
-
- @endforeach  
- @endforeach
- </div>
- 
-  
- <div class="col-md-1">
- 
- </div>
- 
- 
- <div class="col-md-5">
-   <h1 style="text-align:left;color:red;"> Gallery</h1>
-       
-   <div class="row">
-   
-   <div class="col-md-4">
-   
-   @foreach($events->chunk(3) as $events)
-
-   @foreach($events as $event)
-     
-    <div class="row" style="text-align:left;">
-    
-    <a  href="gallerylist/{{$event->name}}">
-    <div style="overflow:hidden;margin-top:5px;height:150px;">
-    <img src="/../storage/gallery/{{$event->name}}/{{$event->path}}" alt="" width="100%">
-    </div>
-    <p > {{$event->name}} </p>
-    </a>
-    
-         
-    </div>
-   
-   @endforeach
-   
-   @endforeach
-   
-   </div>
-       
-   <div class="col-md-8">
-   
-   
-   </div>
-   
-   
-   </div>
-   
-    
- </div>
-  
- </div>
- 
-  </div>

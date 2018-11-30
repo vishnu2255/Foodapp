@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.blogapp')
 
 @section('content')
 <div id="body" style="background:rgba(76, 175, 80, 0.3)">
@@ -15,30 +15,16 @@
 
                 <div id="1" class="carousel-item row no-gutters" style="overflow:hidden;border: 2px solid #ccc;">
                         <div class="row">
-                       <div class="col-md-8">
+                               
+
+                       <div class="col-md-12">
            
                                <div id="btnon" style="" class="featregal row">                 
                                                                                                
                                <img id="btnon" width="100%" src="../images/Food_6.jpg" alt="Event">                             
                                         
                                </div> 
-                       </div>
-           
-                         <div class="col-md-3" style="font-size: 20px;color: black;">
-                        
-                          <div class="row">
-                            Test
-                          </div>
-          
-                          <div class="row">
-                            Test2
-                          </div>
-
-                         </div>
-
-                         <div class="col-md-1">
-                         
-                         </div>
+                       </div>                                                          
 
 
                        </div>
@@ -48,30 +34,15 @@
           
           <div id="2" class="carousel-item row no-gutters" style="overflow:hidden;border: 2px solid #ccc;">
             <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
 
                     <div id="btnon" style="" class="featregal row">                 
                                                                                     
                     <img id="btnon" width="100%" src="../images/Food_6.jpg" alt="Event">                             
                              
                     </div> 
-            </div>
+            </div>              
 
-              <div class="col-md-3" style="font-size: 20px;color: black;">
-             
-               <div class="row">
-                 Test
-               </div>
-
-               <div class="row">
-                 Test2
-               </div>
-           
-              </div>
-              
-               <div class="col-md-1">
-                
-                </div>
               </div>
            
                   
@@ -79,7 +50,7 @@
 
           <div id="3" class="carousel-item row no-gutters" style="overflow:hidden;border: 2px solid #ccc;">
             <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
 
                     <div id="btnon" style="" class="featregal row">                 
                                                                                     
@@ -87,20 +58,7 @@
                              
                     </div> 
             </div>
-
-              <div class="col-md-3" style="font-size: 20px;color: black;">
-             
-               <div class="row">
-                 Test
-               </div>
-
-               <div class="row">
-                 Test2
-               </div>              
-              </div>
-              <div class="col-md-1">
-                
-                </div>                
+                            
             </div>
 
                
@@ -139,7 +97,7 @@
 
     <div class="row" style="background-color: white">
                 
-        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-4" style="background-color:white;">
+        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4" style="background-color:white;">
            
             <div class="btnon12" id="div_1" style="border: 1px solid #ccc">
             
@@ -153,7 +111,7 @@
           </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-4" style="background-color:white;">
+          <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4" style="background-color:white;">
            
               <div class="btnon12" id="div_2" style="border: 1px solid #ccc">
               
@@ -167,7 +125,7 @@
             </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-4" style="background-color:white;">
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4" style="background-color:white;">
            
                 <div class="btnon12" id="div_3" style="border: 1px solid #ccc">
                 
@@ -180,7 +138,7 @@
             
               </div>
               </div>     
-              <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-4" style="background-color:white;">
+              <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4" style="background-color:white;">
            
                   <div class="btnon12" id="div_4" style="border: 1px solid #ccc">
                   
@@ -272,17 +230,16 @@ $(document).ready(
      $("#tempdiv").css("display","none");
 
     }); 
-    
-    
+        
     $(".closediv").click(function(){
     $("#overlay").css("display","none"); 
     $("#tempdiv").css("display","block");
     $(".closediv").css("display","none");
     window.location.reload();
-    
     });
 
     });
+
 </script>
 
 

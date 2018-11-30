@@ -36,10 +36,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('css/blogcss.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/blogcss.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/ionicons@4.2.4/dist/css/ionicons.min.css" rel="stylesheet">    
-{{--     
+    
 <style type="text/css">
     #overlay {
         position: absolute;
@@ -68,7 +68,7 @@
         transform: translate(-50%,-50%);
         -ms-transform: translate(-50%,-50%);
     }
-    </style> --}}
+    </style>
     
 </head>
 <body>

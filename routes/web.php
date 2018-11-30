@@ -10,6 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/gallery1', function () {
+  
+    return view('gallery1');
+  
+});
+
+Route::get('/glist', function () {
+  
+    return view('gallerylists');
+  
+});
 
 Route::get('/post1', function () {
   
@@ -72,7 +83,9 @@ Route::get('/', function () {
   // return view('map')->with('map',$map);
     // return view('test');
     //  return view('welcome');     
-     return view('fireba1');
+    return view('imgtest');
+    
+    //  return view('fireba1');
     //  return view('map2');
    // return view('chefs/profile');
 });
@@ -150,10 +163,6 @@ Auth::routes();
 // //Route::get('/chefs/checkout', 'CheckoutController@show1');
 
 // Route::get('/checkout','CheckoutController@check');
-
-
-
-
 
 Auth::routes();
 

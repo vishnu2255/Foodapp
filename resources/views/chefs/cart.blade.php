@@ -2,6 +2,13 @@
 
 @section('content')
 
+<a  href="gallerylist/{{$event->name}}">
+  <div style="overflow:hidden;margin-top:5px;height:150px;">
+  <img src="/../storage/gallery/{{$event->name}}/{{$event->path}}" alt="" height="100%">
+  
+  
+  </div>
+
 {{-- <div class="row">
     <div class="col-md-9"> 
       
@@ -47,8 +54,7 @@
                     <a href="/chefs/{{$chefid}}" style="font-family: georgia,serif"> <b> {{$chefname}} </b> </a>    
             </h4>
     </div>
-
-        
+     
 </div>
     
 
@@ -86,7 +92,10 @@
               <div class="input-group">
                
                     <button type="button"  class="mr-2 btn btn-primary btn-circle quantity-left-minus  btn-number" style="border-radius: 50%;" data-type="minus" data-field="">
-                      {{-- <span class="glyphicon glyphicon-minus"></span> --}}
+                      {{-- <span class="glyphicon glyphicon
+                      
+                      
+                      -minus"></span> --}}
                       <ion-icon name="remove"></ion-icon>
                     </button>
            
